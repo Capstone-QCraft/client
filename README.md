@@ -1,1 +1,1 @@
-# FE
+# Qcraft front-end
