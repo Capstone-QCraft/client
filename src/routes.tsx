@@ -1,5 +1,5 @@
-import ErrorPage from "./Pages/ErrorPage";
-import MainPage from "./Pages/MainPage";
+import ErrorPage from "./pages/ErrorPage";
+import MainPage from "./pages/MainPage";
 
 const routes = [
   { auth: false, path: "/", element: <MainPage /> },
