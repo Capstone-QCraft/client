@@ -18,6 +18,8 @@ const MainPage = () => {
         style={{
           transform: `scale(${1 - y / 5000})`,
           borderRadius: `${y / 10}px`,
+          aspectRatio: "16/9",
+          objectFit: "cover",
         }}
       />
 
