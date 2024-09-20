@@ -7,6 +7,7 @@ import "./NavBar.css";
 const NavBar = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showNavMenuList, setShowNavMenuList] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -14,70 +15,108 @@ const NavBar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const navLogo = () => {
+    return (
+      <Link className="nav-logo" to="/">
+        Qcraft
+      </Link>
+    );
+  };
+
+  const navItems = () => {
+    return (
+      <ul>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              "link" + (isActive ? " activate" : " nomal")
+            }
+            aria-current="page"
+            to="/"
+            onClick={navMenuListHandler}
+          >
+            소개
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              "link" + (isActive ? " activate" : " nomal")
+            }
+            aria-current="page"
+            to="/question"
+            onClick={navMenuListHandler}
+          >
+            AI질문
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              "link" + (isActive ? " activate" : " nomal")
+            }
+            aria-current="page"
+            to="/history"
+            onClick={navMenuListHandler}
+          >
+            기록
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              "link" + (isActive ? " activate" : " nomal")
+            }
+            aria-current="page"
+            to="/user"
+            onClick={navMenuListHandler}
+          >
+            회원정보
+          </NavLink>
+        </li>
+        <li>
+          <Link
+            className="nav-logout"
+            to="/"
+            onClick={() => {
+              // todo 로그아웃 로직
+              navMenuListHandler();
+            }}
+          >
+            로그아웃
+          </Link>
+        </li>
+      </ul>
+    );
+  };
+
   const navDesktop = () => {
     return (
       <>
         <div className="nav-bg-box"></div>
         <nav>
-          <Link
-            // style={{
-            //   width: "50px",
-            //   height: "50px",
-            // }}
-            className="nav-logo"
-            to="/"
-          >
-            Qcraft
-          </Link>
-          <ul>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  "link" + (isActive ? " activate" : "")
-                }
-                aria-current="page"
-                to="/"
-              >
-                소개
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  "link" + (isActive ? " activate" : "")
-                }
-                aria-current="page"
-                to="/question"
-              >
-                AI질문
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  "link" + (isActive ? " activate" : "")
-                }
-                aria-current="page"
-                to="/history"
-              >
-                기록
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  "link" + (isActive ? " activate" : "")
-                }
-                aria-current="page"
-                to="/user"
-              >
-                회원정보
-              </NavLink>
-            </li>
-          </ul>
+          {navLogo()}
+          {navItems()}
         </nav>
       </>
     );
+  };
+
+  const navMenuListHandler = () => {
+    const box = document.getElementById("nav-menu-list-container");
+    if (box) {
+      if (showNavMenuList) {
+        box.style.height = "0"; // nav 메뉴 리스트 숨기기
+        box.style.opacity = "0";
+        document.body.style.overflow = "auto"; // 스크롤 활성화
+        setShowNavMenuList(!showNavMenuList);
+      } else {
+        box.style.height = "100%"; // nav 메뉴 리스트 보이기
+        box.style.opacity = "1";
+        document.body.style.overflow = "hidden"; // 스크롤 비활성화
+        setShowNavMenuList(!showNavMenuList);
+      }
+    }
   };
 
   const navMovile = () => {
@@ -85,19 +124,22 @@ const NavBar = () => {
       <>
         <div className="nav-bg-box"></div>
         <nav>
-          <Link
-            // style={{
-            //   width: "50px",
-            //   height: "50px",
-            // }}
-            className="nav-logo"
-            to="/"
-          >
-            Qcraft
-          </Link>
-          <button className="nav-menu-list-button">=</button>
+          {navLogo()}
+          <button className="nav-menu-list-button" onClick={navMenuListHandler}>
+            =
+          </button>
         </nav>
-        <div className="nav-menu-list-container"></div>
+        <div id="nav-menu-list-container" className="nav-menu-list-container">
+          <div className="nav-menu-list-button-container">
+            <button
+              className="nav-menu-list-button"
+              onClick={navMenuListHandler}
+            >
+              x
+            </button>
+          </div>
+          {navItems()}
+        </div>
       </>
     );
   };
@@ -106,6 +148,7 @@ const NavBar = () => {
     if (windowWidth < 768) {
       return navMovile();
     } else {
+      if (showNavMenuList) navMenuListHandler();
       return navDesktop();
     }
   } else {

@@ -8,6 +8,18 @@
   z-index: 9;
 }
 
+.nav-logo {
+  font-weight: bold;
+}
+
+.nav-logout {
+  color: var(--nav-logout-color);
+}
+
+.nav-logout:hover {
+  color: var(--nav-logout-color-hover);
+}
+
 nav {
   width: 100%;
   height: var(--nav-height);
@@ -57,10 +69,58 @@ a:hover {
   height: 0;
   /* height: 100%; */
   width: 100%;
+  opacity: 0;
   position: fixed;
   z-index: 11;
+  overflow: hidden;
+  transition: height 0.4s, opacity 0.4s;
 }
 
 .nav-menu-list-button {
-  background-color: none;
+  font-size: 30px;
+  color: var(--nav-color);
+  background-color: transparent;
+  border: none;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.nav-menu-list-button:hover {
+  color: var(--nav-color-hover);
+}
+
+.nav-menu-list-button-container {
+  height: 50px;
+  display: flex;
+  justify-content: right;
+}
+
+@media screen and (max-width: 767px) {
+  .activate,
+  .nomal,
+  .nav-logout {
+    margin-left: 50px;
+  }
+  .activate {
+    font-size: 35px;
+    border-bottom: none;
+    color: var(--nav-color-hover);
+  }
+  .nomal {
+    font-size: 25px;
+  }
+  .nav-logout {
+    font-size: 18px;
+    position: absolute;
+    bottom: 100px;
+  }
+  ul {
+    height: 100%;
+    display: block;
+    position: relative;
+  }
+  li {
+    height: 60px;
+    display: flex;
+  }
 }
