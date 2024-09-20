@@ -1,21 +1,12 @@
 {
   "short_name": "Qcraft",
-  "name": "Qcraft: AI Create interview questions",
+  "name": "Qcraft",
+  "description": "Qcraft: AI 기반의 면접 준비 도구로, 실시간 면접 질문과 피드백을 통해 면접 대비를 도와드립니다.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "16x16",
+      "src": "images/logo/favicon.ico",
+      "sizes": "48x48 32x32 16x16",
       "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",

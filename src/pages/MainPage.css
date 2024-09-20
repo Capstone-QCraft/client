@@ -1,11 +1,33 @@
-img {
-  width: 100%;
-}
-body {
-  height: 200vh;
-}
 .introduce-container {
-  margin-top: 100px;
-  margin-left: 5%;
-  margin-right: 5%;
+  display: flex;
+  margin: 100px 5%;
+  justify-content: space-between;
+}
+
+.introduce-left {
+  font-size: 20px;
+}
+
+.introduce-right {
+  display: flex;
+  align-items: center;
+}
+
+.button-start {
+  width: 250px;
+  height: 100px;
+  font-size: 35px;
+  font-weight: bold;
+  color: var(--color);
+  background-color: var(--main-button-bg-color);
+  border: 2px solid black;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.button-start:hover {
+  transform: scale(1.05);
+  background-color: var(--main-button-bg-color-hover);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }

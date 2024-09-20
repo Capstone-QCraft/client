@@ -1,0 +1,126 @@
+.activate {
+  border-bottom: 2px solid var(--nav-color);
+}
+
+.nav-bg-box {
+  height: var(--nav-height);
+  background-color: var(--nav-bg-color);
+  z-index: 9;
+}
+
+.nav-logo {
+  font-weight: bold;
+}
+
+.nav-logout {
+  color: var(--nav-logout-color);
+}
+
+.nav-logout:hover {
+  color: var(--nav-logout-color-hover);
+}
+
+nav {
+  width: 100%;
+  height: var(--nav-height);
+  background-color: var(--nav-bg-color);
+  top: 0;
+  position: fixed;
+  z-index: 10;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+ul {
+  height: 100%;
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  height: 100%;
+  display: flex;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: var(--nav-color);
+  text-decoration: none;
+  margin: 0 20px;
+}
+
+a:hover {
+  color: var(--nav-color-hover);
+}
+
+.nav-menu-list-container {
+  background-color: var(--nav-menu-list-bg-color);
+  top: 0;
+  left: 0;
+  height: 0;
+  /* height: 100%; */
+  width: 100%;
+  opacity: 0;
+  position: fixed;
+  z-index: 11;
+  overflow: hidden;
+  transition: height 0.4s, opacity 0.4s;
+}
+
+.nav-menu-list-button {
+  font-size: 30px;
+  color: var(--nav-color);
+  background-color: transparent;
+  border: none;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.nav-menu-list-button:hover {
+  color: var(--nav-color-hover);
+}
+
+.nav-menu-list-button-container {
+  height: 50px;
+  display: flex;
+  justify-content: right;
+}
+
+@media screen and (max-width: 767px) {
+  .activate,
+  .nomal,
+  .nav-logout {
+    margin-left: 50px;
+  }
+  .activate {
+    font-size: 35px;
+    border-bottom: none;
+    color: var(--nav-color-hover);
+  }
+  .nomal {
+    font-size: 25px;
+  }
+  .nav-logout {
+    font-size: 18px;
+    position: absolute;
+    bottom: 100px;
+  }
+  ul {
+    height: 100%;
+    display: block;
+    position: relative;
+  }
+  li {
+    height: 60px;
+    display: flex;
+  }
+}

@@ -5,9 +5,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: black;
+  background-color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --nav-height: 50px;
+  --nav-color: #784421;
+  --nav-color-hover: #45230c;
+  --nav-bg-color: rgb(250, 250, 252, 0.9);
+  --nav-menu-list-bg-color: rgb(250, 250, 252);
+  --nav-logout-color: crimson;
+  --nav-logout-color-hover: red;
+  --main-button-color: white;
+  --main-button-bg-color: #deaa87;
+  --main-button-bg-color-hover: #ab7754;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nav-color: #deaa87;
+    --nav-color-hover: #784421;
+    --nav-bg-color: rgba(22, 22, 23, 0.9);
+    --nav-menu-list-bg-color: rgb(22, 22, 23);
+    --nav-logout-color: brown;
+    --nav-logout-color-hover: crimson;
+    --main-button-color: black;
+    --main-button-bg-color: #784421;
+    --main-button-bg-color-hover: #3c2210;
+  }
+  body {
+    color: white;
+    background-color: black;
+  }
 }
