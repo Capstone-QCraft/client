@@ -68,7 +68,7 @@ nav {
 }
 
 .activate-desktop {
-  border-bottom: 2px solid var(--nav-color);
+  border-bottom: 2px solid var(--nav-color-hover);
   color: var(--nav-color-hover);
 }
 

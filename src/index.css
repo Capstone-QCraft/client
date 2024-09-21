@@ -15,9 +15,9 @@ code {
     monospace;
 }
 
+/* color light */
 :root {
   --color: black;
-  --nav-height: 50px;
   --nav-color: #784421;
   --nav-color-hover: #45230c;
   --nav-bg-color: rgb(250, 250, 252, 0.9);
@@ -30,6 +30,7 @@ code {
   --main-button-bg-color-hover: #ab7754;
 }
 
+/* color dark */
 @media (prefers-color-scheme: dark) {
   :root {
     --color: white;
@@ -47,5 +48,18 @@ code {
   body {
     color: white;
     background-color: black;
+  }
+}
+
+/* size desktop */
+:root {
+  --nav-height: 50px;
+  --introduce-container: flex;
+}
+
+/* size mobile */
+@media screen and (max-width: 768px) {
+  :root {
+    --introduce-container: auto;
   }
 }

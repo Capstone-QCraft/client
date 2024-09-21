@@ -1,16 +1,12 @@
 .introduce-container {
-  display: flex;
-  margin: 100px 5%;
+  display: var(--introduce-container);
   justify-content: space-between;
-}
-
-.introduce-left {
-  font-size: 20px;
-}
-
-.introduce-right {
-  display: flex;
   align-items: center;
+}
+
+.discription-container {
+  margin: 100px 5%;
+  font-size: 20px;
 }
 
 .button-start {

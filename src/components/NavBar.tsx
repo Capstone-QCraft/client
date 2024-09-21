@@ -111,7 +111,6 @@ const NavBar = () => {
         <div className="nav-bg-box"></div>
         <nav>
           {navLogo()}
-          {/* {navItems()} */}
           <ul className="nav-ul-desktop">
             {navLinkDesktop("소개", "/")}
             {navLinkDesktop("AI질문", "/ai")}
