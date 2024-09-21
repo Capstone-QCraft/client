@@ -93,6 +93,7 @@ nav {
   margin: 0;
   padding: 0;
   padding-left: 50px;
+  padding-top: 50px;
 }
 
 .nav-li-mobile {
@@ -125,4 +126,55 @@ nav {
   height: 50px;
   display: flex;
   justify-content: right;
+}
+
+/* navShowBtn */
+
+.menu-icon {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+  z-index: 12;
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin: 15px 10px;
+}
+
+.line {
+  width: 100%;
+  border-radius: 1.5px;
+  height: 3px;
+  background-color: var(--main-button-bg-color);
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+}
+.line.top {
+  top: 0;
+}
+.line.middle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.line.bottom {
+  bottom: 0;
+}
+
+.menu-icon.open .line.top {
+  transform: rotate(45deg);
+  top: 50%;
+}
+.menu-icon.open .line.middle {
+  transform: rotate(45deg);
+  opacity: 0;
+}
+.menu-icon.open .line.bottom {
+  transform: rotate(135deg);
+  top: 50%;
+}
+
+.menu-icon:hover .line {
+  background-color: var(--main-button-bg-color-hover);
 }
