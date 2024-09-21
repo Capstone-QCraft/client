@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./MainPage.css";
+import mainImg from "../assets/images/ai2.webp";
 
 const MainPage = () => {
   const [y, setY] = useState(0);
@@ -39,7 +40,7 @@ const MainPage = () => {
       </div>
 
       <img
-        src="/images/ai1.webp"
+        src={mainImg}
         alt="메인 이미지"
         width="100%"
         style={{

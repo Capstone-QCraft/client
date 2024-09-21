@@ -4,7 +4,7 @@
   "description": "Qcraft: AI 기반의 면접 준비 도구로, 실시간 면접 질문과 피드백을 통해 면접 대비를 도와드립니다.",
   "icons": [
     {
-      "src": "images/logo/favicon.ico",
+      "src": "favicon-light.ico",
       "sizes": "48x48 32x32 16x16",
       "type": "image/x-icon"
     }
