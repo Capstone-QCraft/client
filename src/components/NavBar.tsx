@@ -45,17 +45,6 @@ const NavBar = () => {
     );
   };
 
-  const navShowButton = (src: string, alt: string) => {
-    return (
-      <img
-        className="nav-img"
-        src={src}
-        onClick={navMenuListHandler}
-        alt={alt}
-      />
-    );
-  };
-
   const navLogout = (str: DEVICE_TYPE) => {
     return (
       <li className={`nav-li-${str}`}>
@@ -124,6 +113,9 @@ const NavBar = () => {
   };
 
   const navMenuListHandler = () => {
+    const menuIcon = document.querySelector(".menu-icon");
+    if (menuIcon) menuIcon.classList.toggle("open");
+
     const box = document.getElementById("nav-menu-list-container");
     if (box) {
       if (showNavMenuList) {
@@ -144,14 +136,8 @@ const NavBar = () => {
     return (
       <>
         <div className="nav-bg-box"></div>
-        <nav>
-          {navLogo()}
-          {navShowButton(isDarkMode ? logoLight : logoDark, "nav-open")}
-        </nav>
+        <nav>{navLogo()}</nav>
         <div id="nav-menu-list-container" className="nav-menu-list-container">
-          <div className="nav-show-button-container">
-            {navShowButton(isDarkMode ? logoDark : logoLight, "nav-open")}
-          </div>
           <ul className="nav-ul-mobile">
             {navLinkMobile("소개", "/")}
             {navLinkMobile("AI질문", "/ai")}
@@ -159,6 +145,11 @@ const NavBar = () => {
             {navLinkMobile("내정보", "/user")}
             {navLogout(DEVICE_TYPE.MOBILE)}
           </ul>
+        </div>
+        <div className="menu-icon" onClick={navMenuListHandler}>
+          <div className="line top"></div>
+          <div className="line middle"></div>
+          <div className="line bottom"></div>
         </div>
       </>
     );

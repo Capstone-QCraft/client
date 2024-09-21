@@ -22,8 +22,8 @@ const MainPage = () => {
     return (
       <div className="discription-container">
         <h1>{h1}</h1>
-        {ps.map((p) => (
-          <p>{p}</p>
+        {ps.map((p, i) => (
+          <p key={i}>{p}</p>
         ))}
       </div>
     );
