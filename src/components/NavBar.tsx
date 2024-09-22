@@ -11,6 +11,13 @@ enum DEVICE_TYPE {
   MOBILE = "mobile",
 }
 
+const NavItems = [
+  ["소개", "/"],
+  ["AI질문", "/ai"],
+  ["기록", "/history"],
+  ["내정보", "/user"],
+];
+
 const NavBar = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -63,7 +70,7 @@ const NavBar = () => {
 
   const navLinkDesktop = (content: string, url: string) => {
     return (
-      <li className="nav-li-desktop">
+      <li className="nav-li-desktop" key={DEVICE_TYPE.DESKTOP + url}>
         <NavLink
           className={({ isActive }) =>
             "link" + (isActive ? " activate-desktop" : "") + " nav-a-desktop"
@@ -79,7 +86,7 @@ const NavBar = () => {
 
   const navLinkMobile = (content: string, url: string) => {
     return (
-      <li className="nav-li-mobile">
+      <li className="nav-li-mobile" key={DEVICE_TYPE.MOBILE + url}>
         <NavLink
           className={({ isActive }) =>
             "link" + (isActive ? " activate-mobile" : "") + " nav-a-mobile"
@@ -101,10 +108,7 @@ const NavBar = () => {
         <nav>
           {navLogo()}
           <ul className="nav-ul-desktop">
-            {navLinkDesktop("소개", "/")}
-            {navLinkDesktop("AI질문", "/ai")}
-            {navLinkDesktop("기록", "/history")}
-            {navLinkDesktop("내정보", "/user")}
+            {NavItems.map((item) => navLinkDesktop(item[0], item[1]))}
             {navLogout(DEVICE_TYPE.DESKTOP)}
           </ul>
         </nav>
@@ -139,10 +143,7 @@ const NavBar = () => {
         <nav>{navLogo()}</nav>
         <div id="nav-menu-list-container" className="nav-menu-list-container">
           <ul className="nav-ul-mobile">
-            {navLinkMobile("소개", "/")}
-            {navLinkMobile("AI질문", "/ai")}
-            {navLinkMobile("기록", "/history")}
-            {navLinkMobile("내정보", "/user")}
+            {NavItems.map((item) => navLinkMobile(item[0], item[1]))}
             {navLogout(DEVICE_TYPE.MOBILE)}
           </ul>
         </div>
