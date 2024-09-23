@@ -1,6 +1,7 @@
 import AIPage from "./pages/AIPage";
 import ErrorPage from "./pages/ErrorPage";
 import HistoryPage from "./pages/HistoryPage";
+import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import UserPage from "./pages/UserPage";
 
@@ -9,6 +10,7 @@ const routes = [
   { auth: false, path: "/ai", element: <AIPage /> },
   { auth: false, path: "/history", element: <HistoryPage /> },
   { auth: false, path: "/user", element: <UserPage /> },
+  { auth: false, path: "/login", element: <LoginPage /> },
   { auth: false, path: "*", element: <ErrorPage /> },
 ];
 
