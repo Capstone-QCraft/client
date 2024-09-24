@@ -7,13 +7,11 @@ import UserPage from "./pages/UserPage";
 
 const routes = [
   { auth: false, path: "/", element: <MainPage /> },
-  { auth: false, path: "/ai", element: <AIPage /> },
-  { auth: false, path: "/history", element: <HistoryPage /> },
-  { auth: false, path: "/user", element: <UserPage /> },
-  { auth: false, path: "/login", element: <LoginPage /> },
+  { auth: true, path: "/ai", element: <AIPage /> },
+  { auth: true, path: "/history", element: <HistoryPage /> },
+  { auth: true, path: "/user", element: <UserPage /> },
+  { auth: false, isLoginPage: true, path: "/login", element: <LoginPage /> },
   { auth: false, path: "*", element: <ErrorPage /> },
 ];
 
 export default routes;
-
-//test

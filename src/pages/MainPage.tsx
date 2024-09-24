@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+  const navigate = useNavigate();
   const [y, setY] = useState(0);
   useEffect(() => {
     const handleScroll = () => setY(Math.min(500, window.scrollY));
@@ -19,6 +21,7 @@ const MainPage = () => {
           "제출한 답변을 AI를 통해 피드백을 받아보세요",
         ]}
         btn="지금 시작하기"
+        onClick={() => navigate("/ai")}
       />
 
       <img

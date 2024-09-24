@@ -4,9 +4,10 @@ interface DiscriptionProps {
   h1: string;
   ps: string[];
   btn?: string;
+  onClick?: () => void;
 }
 
-const Discription: React.FC<DiscriptionProps> = ({ h1, ps, btn }) => {
+const Discription: React.FC<DiscriptionProps> = ({ h1, ps, btn, onClick }) => {
   return (
     <div className="discription-container">
       <div className="discription-inner">
@@ -16,9 +17,11 @@ const Discription: React.FC<DiscriptionProps> = ({ h1, ps, btn }) => {
         ))}
       </div>
 
-      {btn && (
+      {btn && onClick && (
         <div className="discription-inner">
-          <button className="discription-button">{btn}</button>
+          <button className="discription-button" onClick={onClick}>
+            {btn}
+          </button>
         </div>
       )}
     </div>

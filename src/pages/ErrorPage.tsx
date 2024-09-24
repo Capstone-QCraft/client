@@ -1,8 +1,10 @@
 import React from "react";
 import error404 from "../assets/images/error404.webp";
 import Discription from "../components/Discription";
+import { useNavigate } from "react-router-dom";
 
 const ErrorPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <img src={error404} alt="error404" height="100vh"></img>
@@ -14,6 +16,7 @@ const ErrorPage = () => {
           "요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.",
         ]}
         btn="Qcraft 홈"
+        onClick={() => navigate("/")}
       />
     </>
   );
