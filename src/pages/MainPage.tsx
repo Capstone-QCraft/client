@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,9 @@ const MainPage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Qcraft</title>
+      </Helmet>
       <Discription
         h1="면접 준비의 첫걸음 AI와 함께, Qcraft"
         ps={[
