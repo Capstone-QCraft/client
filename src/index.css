@@ -28,6 +28,7 @@ code {
   --main-button-shadow: rgba(0, 0, 0, 0.5);
   --main-button-bg-color: #deaa87;
   --main-button-bg-color-hover: #ab7754;
+  --error: url("/src/assets/images/error404-light.webp");
 }
 
 /* color dark */
@@ -44,6 +45,7 @@ code {
     --main-button-shadow: rgba(255, 255, 255, 0.5);
     --main-button-bg-color: #784421;
     --main-button-bg-color-hover: #3c2210;
+    --error: url("/src/assets/images/error404-dark.png");
   }
   body {
     color: white;

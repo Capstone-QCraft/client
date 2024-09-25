@@ -2,12 +2,21 @@ import React from "react";
 import error404 from "../assets/images/error404.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
+import "./ErrorPage.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const ErrorPage = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
   const navigate = useNavigate();
   return (
-    <>
-      <img src={error404} alt="error404" height="100vh"></img>
+    <div
+      className="error-page-container"
+      style={
+        isLoggedIn ? { height: "calc(100vh - 50px)" } : { height: "100vh" }
+      }
+    >
       <Discription
         h1="404 ERROR"
         ps={[
@@ -18,7 +27,7 @@ const ErrorPage = () => {
         btn="Qcraft 홈"
         onClick={() => navigate("/")}
       />
-    </>
+    </div>
   );
 };
 

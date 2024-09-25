@@ -25,18 +25,6 @@ function App() {
               ) : (
                 route.element
               )
-              //   route.auth ? (
-              //     route.isLoginPage ? (
-              //       <ProtectedRoute
-              //         element={route.element}
-              //         isLoginPage={route.isLoginPage}
-              //       />
-              //     ) : (
-              //       <ProtectedRoute element={route.element} />
-              //     )
-              //   ) : (
-              //     route.element
-              //   )
             }
           ></Route>
         ))}

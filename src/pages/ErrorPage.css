@@ -1,0 +1,7 @@
+.error-page-container {
+  background-image: var(--error);
+  background-position: center;
+  overflow: hidden;
+  filter: brightness(100%);
+  z-index: -1;
+}
