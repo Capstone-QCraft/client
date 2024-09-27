@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Link, NavLink } from "react-router-dom";
 import "./NavBar.css";
 import logoLight from "../assets/images/logo-light.png";
 import logoDark from "../assets/images/logo-dark.png";
+import { logout } from "../store/authSlice";
 
 enum DEVICE_TYPE {
   DESKTOP = "desktop",
@@ -19,6 +20,7 @@ const NavItems = [
 ];
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -59,7 +61,7 @@ const NavBar = () => {
           className={`nav-logout-${str}`}
           to="/"
           onClick={() => {
-            /* 로그아웃 로직 */
+            dispatch(logout());
           }}
         >
           로그아웃
