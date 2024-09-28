@@ -10,7 +10,7 @@
 .card {
   width: var(--card-width);
   box-sizing: border-box;
-  height: 520px;
+  height: 550px;
   padding: 20px;
   border: 1px solid var(--login-card-border);
   background-color: var(--bg-color);
@@ -81,7 +81,7 @@
   border: none;
   border-radius: 10px;
   height: 40px;
-  width: 100px;
+  width: 150px;
   margin-left: 10px;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -96,4 +96,17 @@
 
 .input-with-button {
   display: flex;
+}
+
+.password-condition-container {
+  margin: 0 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.password-condition-container p {
+  margin: 0;
+  padding: 0;
+  color: darkgray;
 }
