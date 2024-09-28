@@ -22,7 +22,7 @@ enum INPUT_LENGTH {
 
 const LoginPage = () => {
   const dispatch = useDispatch();
-  const [isFlipped, setIsFlipped] = useState(true);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [signupName, setSignupName] = useState("");
