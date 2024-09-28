@@ -12,10 +12,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   isLoginPage,
 }) => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-
-  console.log("isLoggedIn:", isLoggedIn);
-  console.log("isLoginPage:", isLoginPage);
-
   if (!isLoggedIn && !isLoginPage) return <Navigate to="/login" />;
   if (isLoggedIn && isLoginPage) return <Navigate to="/" />;
   return element;

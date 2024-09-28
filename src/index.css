@@ -89,3 +89,15 @@ code {
     --card-width: 100%;
   }
 }
+
+/* input type number의 스피너 없애기 */
+/* 크롬, 사파리, 엣지, 오페라 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* 파이어폭스 */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
