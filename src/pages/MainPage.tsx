@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div>
+    <HelmetProvider>
       <Helmet>
         <title>Qcraft</title>
       </Helmet>
@@ -54,7 +54,7 @@ const MainPage = () => {
           "입사 지원서 업로드 -> AI 면접 예상 질문 생성 -> 답변 제출 -> AI피드백",
         ]}
       />
-    </div>
+    </HelmetProvider>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Helmet } from "react-helmet";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./LoginPage.css";
 import InputField from "../components/InputField";
 import { useDispatch } from "react-redux";
@@ -138,7 +138,7 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>{isFlipped ? "회원가입" : "로그인"}</title>
       </Helmet>
@@ -255,7 +255,7 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

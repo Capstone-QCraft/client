@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import "./ErrorPage.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { Helmet } from "react-helmet";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 const ErrorPage = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   const navigate = useNavigate();
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>Error 404</title>
       </Helmet>
@@ -33,7 +33,7 @@ const ErrorPage = () => {
           onClick={() => navigate("/")}
         />
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 
