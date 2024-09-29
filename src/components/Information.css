@@ -1,19 +1,37 @@
 .information-container {
   border: 1px solid rgb(226, 227, 225);
   border-radius: 10px;
-  /* width: 500px; */
-  width: 95%;
-  padding: 0 20px;
+  width: var(--info-container-width);
   box-sizing: border-box;
-  margin: 10px 100px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.info-h2 {
+  padding: 0 20px;
 }
 
 .information-inner {
-  display: flex;
+  padding: 20px 20px;
+  margin: 0;
+  display: var(--information-inner);
   justify-content: space-between;
-  border-radius: 10px;
+  align-items: center;
+  cursor: pointer;
 }
 
 .information-inner:hover {
-  background-color: aliceblue;
+  background-color: var(--info-hover);
+}
+
+.info-title {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.info-content {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
 }

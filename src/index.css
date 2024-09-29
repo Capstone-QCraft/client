@@ -41,6 +41,8 @@ code {
   --login-card-box-shadow: rgba(0, 0, 0, 0.2);
   --login-password-look-color: #0073e6;
   --login-password-look-color-hover: #005bb5;
+
+  --info-hover: rgb(246, 246, 246);
 }
 
 /* color dark */
@@ -68,6 +70,8 @@ code {
     --login-card-border: #999;
     --login-input-focused-border-color: #784421;
     --login-card-box-shadow: rgba(255, 255, 255, 0.2);
+
+    --info-hover: rgb(50, 50, 50);
   }
   body {
     color: white;
@@ -80,6 +84,8 @@ code {
   --nav-height: 50px;
   --introduce-container: flex;
   --card-width: 500px;
+  --information-inner: flex;
+  --info-container-width: 500px;
 }
 
 /* size mobile */
@@ -87,6 +93,8 @@ code {
   :root {
     --introduce-container: auto;
     --card-width: 100%;
+    --information-inner: block;
+    --info-container-width: 95%;
   }
 }
 

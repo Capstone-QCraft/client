@@ -1,12 +1,12 @@
 .user-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  /* height: 100vh; */
-  /* box-sizing: border-box; */
+  width: 100%;
 }
 
 .user-hr {
   border: 0.5px solid rgb(226, 227, 225);
+  margin: 0;
+  padding: 0;
 }
