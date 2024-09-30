@@ -61,6 +61,7 @@ const NavBar = () => {
           className={`nav-logout-${str}`}
           to="/"
           onClick={() => {
+            navMenuListHandler();
             dispatch(logout());
           }}
         >
