@@ -3,15 +3,38 @@ import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import Modal from "../components/Modal";
+import InputField from "../components/InputField";
+import InputFIle from "../components/InputFIle";
 
 const MainPage = () => {
   const navigate = useNavigate();
+
   const [y, setY] = useState(0);
   useEffect(() => {
     const handleScroll = () => setY(Math.min(500, window.scrollY));
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  const [job, setJob] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  // const setFile = (e: React.ChangeEvent<HTMLInputElement>) =>
+  //   setSelectedFile(e.target.files[0]);
+
+  const handleStart = () => {
+    if (isLoggedIn) {
+      openModal();
+    } else navigate("/login");
+  };
 
   return (
     <HelmetProvider>
@@ -25,7 +48,7 @@ const MainPage = () => {
           "제출한 답변을 AI를 통해 피드백을 받아보세요",
         ]}
         btn="지금 시작하기"
-        onClick={() => navigate("/ai")}
+        onClick={handleStart}
       />
 
       <img
@@ -54,6 +77,24 @@ const MainPage = () => {
           "입사 지원서 업로드 -> AI 면접 예상 질문 생성 -> 답변 제출 -> AI피드백",
         ]}
       />
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <form>
+          <InputField
+            label="직종 입력"
+            type="text"
+            value={job}
+            onChange={(e) => setJob(e.target.value)}
+          />
+          <InputFIle />
+
+          <div>
+            <button className="auth-button" type="submit">
+              질문 생성
+            </button>
+          </div>
+        </form>
+      </Modal>
     </HelmetProvider>
   );
 };
