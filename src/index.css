@@ -43,6 +43,10 @@ code {
   --login-password-look-color-hover: #005bb5;
 
   --info-hover: rgb(246, 246, 246);
+
+  --input-file-bg: rgb(249, 250, 251);
+  --input-file-border: rgb(229, 231, 235);
+  --input-file-border-hover: rgb(168, 180, 247);
 }
 
 /* color dark */

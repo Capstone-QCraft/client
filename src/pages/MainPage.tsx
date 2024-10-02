@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
-import InputFIle from "../components/InputFIle";
+import InputFile from "../components/InputFile";
+import Button from "../components/Button";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -23,17 +24,33 @@ const MainPage = () => {
 
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  const closeModal = () => {
+    setModalOpen(false);
+    setJob("");
+    setSelectedFile(null);
+  };
 
   const [job, setJob] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  // const setFile = (e: React.ChangeEvent<HTMLInputElement>) =>
-  //   setSelectedFile(e.target.files[0]);
-
+  const handleFileSelect = (file: File | null) => {
+    setSelectedFile(file);
+  };
   const handleStart = () => {
     if (isLoggedIn) {
       openModal();
     } else navigate("/login");
+  };
+
+  const jobRef = useRef<HTMLInputElement>(null);
+  const handleCreate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (job === "") {
+      if (jobRef.current) jobRef.current.focus();
+    } else if (!selectedFile) {
+      // 입력된 파일 없을 때
+    } else {
+      // ai 페이지로 가는 로직
+    }
   };
 
   return (
@@ -79,20 +96,16 @@ const MainPage = () => {
       />
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <form>
+        <form onSubmit={handleCreate}>
           <InputField
             label="직종 입력"
             type="text"
             value={job}
             onChange={(e) => setJob(e.target.value)}
+            inputRef={jobRef}
           />
-          <InputFIle />
-
-          <div>
-            <button className="auth-button" type="submit">
-              질문 생성
-            </button>
-          </div>
+          <InputFile onFileSelect={handleFileSelect} />
+          <Button name="질문 생성" type="submit" />
         </form>
       </Modal>
     </HelmetProvider>

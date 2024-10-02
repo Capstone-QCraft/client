@@ -1,0 +1,31 @@
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  width: 100%;
+  cursor: pointer;
+  background-color: var(--input-file-bg);
+  border-radius: 5px;
+  border: 2px dashed var(--input-file-border);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.custom-file-upload.error {
+  border-color: red;
+}
+
+.custom-file-upload:hover {
+  border-color: var(--input-file-border-hover);
+}
+
+.file-input {
+  display: none;
+}
+
+.custom-file-upload label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
