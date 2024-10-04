@@ -1,0 +1,14 @@
+.ai-container {
+  width: 100%;
+  padding-top: 50px;
+  /* height: calc(100vh - 50px); */
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-inner {
+  width: 500px;
+  background-color: antiquewhite;
+}

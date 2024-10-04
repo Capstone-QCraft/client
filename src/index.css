@@ -47,6 +47,9 @@ code {
   --input-file-bg: rgb(249, 250, 251);
   --input-file-border: rgb(229, 231, 235);
   --input-file-border-hover: rgb(168, 180, 247);
+
+  --chat-q-bg: rgb(190, 205, 222);
+  --chat-a-bg: rgb(251, 229, 77);
 }
 
 /* color dark */

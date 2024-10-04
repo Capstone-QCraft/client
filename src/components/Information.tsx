@@ -11,17 +11,13 @@ const Information: React.FC<InformationProps> = ({ h2, contents }) => {
     <div className="information-container">
       <h2 className="info-h2">{h2}</h2>
       {contents.map((content, i) => (
-        <>
+        <React.Fragment key={i}>
           <div className="information-inner">
-            <p className="info-title" key={content + "0"}>
-              {content[0]}
-            </p>
-            <p className="info-content" key={content + "1"}>
-              {content[1]}
-            </p>
+            <p className="info-title">{content[0]}</p>
+            <p className="info-content">{content[1]}</p>
           </div>
           {i < contents.length - 1 && <hr className="user-hr"></hr>}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
