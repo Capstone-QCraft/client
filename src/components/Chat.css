@@ -1,46 +1,65 @@
-/* 말풍선 컨테이너 및 프로필 이미지 */
-.chat-wrapper {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 20px;
-}
-
-.chat-profile {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-/* 말풍선 스타일 */
 .chat-container {
-  position: relative;
-  max-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
-.chat-bubble {
-  background-color: var(--chat-q-bg);
-  border-radius: 10px;
+.chat-inner {
   padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 400px;
   position: relative;
 }
 
-/* 말풍선 꼬리 */
-/* .chat-bubble::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -10px;
-  width: 0;
-  height: 0;
-  border-width: 10px;
-  border-style: solid;
-  border-color: var(--chat-q-bg) transparent transparent transparent;
-  transform: translateY(-50%);
-} */
+.chat-q {
+  background-color: var(--chat-q-bg);
+  align-self: flex-start;
+  font-weight: bold;
+}
+
+.chat-a {
+  background-color: var(--chat-a-bg);
+  align-self: flex-end;
+  color: black;
+}
 
 .chat-content {
   margin: 0;
-  font-size: 14px;
-  color: #333;
+  padding: 0;
+}
+
+.chat-textarea {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  resize: none;
+  width: 360px;
+  height: 100px;
+}
+
+.chat-textarea:focus {
+  outline: none;
+}
+
+.chat-mic-button {
+  margin: 0;
+  padding: 0;
+  padding-top: 3px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.chat-mic-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.chat-mic-img {
+  width: 30px;
+  height: 30px;
 }

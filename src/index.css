@@ -79,6 +79,9 @@ code {
     --login-card-box-shadow: rgba(255, 255, 255, 0.2);
 
     --info-hover: rgb(50, 50, 50);
+
+    --chat-q-bg: rgb(49, 49, 49);
+    --chat-a-bg: rgb(251, 229, 77);
   }
   body {
     color: white;
