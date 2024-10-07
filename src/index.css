@@ -43,6 +43,13 @@ code {
   --login-password-look-color-hover: #005bb5;
 
   --info-hover: rgb(246, 246, 246);
+
+  --input-file-bg: rgb(249, 250, 251);
+  --input-file-border: rgb(229, 231, 235);
+  --input-file-border-hover: rgb(168, 180, 247);
+
+  --chat-q-bg: rgb(190, 205, 222);
+  --chat-a-bg: rgb(251, 229, 77);
 }
 
 /* color dark */
@@ -72,6 +79,9 @@ code {
     --login-card-box-shadow: rgba(255, 255, 255, 0.2);
 
     --info-hover: rgb(50, 50, 50);
+
+    --chat-q-bg: rgb(49, 49, 49);
+    --chat-a-bg: rgb(251, 229, 77);
   }
   body {
     color: white;
