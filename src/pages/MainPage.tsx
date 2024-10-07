@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
-import InputFile from "../components/InputFile_rename";
+import InputFile from "../components/InputFile";
 import Button from "../components/Button";
 
 const MainPage = () => {

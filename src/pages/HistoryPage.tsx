@@ -1,6 +1,7 @@
 import React from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Chat from "../components/Chat";
+import "./HistoryPage.css";
 
 const HistoryPage = () => {
   const questions = ["질문1", "질문2", "질문3", "질문4", "질문5"];
