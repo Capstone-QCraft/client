@@ -21,18 +21,14 @@ const AIPage = () => {
       <div className="ai-container">
         <div className="ai-inner">
           {questions.map((v, i) => (
-            <Chat
-              key={i}
-              question={v}
-              answer={answers[i]}
-              onChange={(e) => handleChange(i, e.target.value)}
-            />
+            <section key={i} className="ai-section">
+              <Chat
+                question={v}
+                answer={answers[i]}
+                onChange={(e) => handleChange(i, e.target.value)}
+              />
+            </section>
           ))}
-          {/* <Chat
-            question="팀 프로젝트를 진행하면서 어려운 점은 무엇이었으며, 어떻게 해결하여 나갔나요?"
-            answer="팀프로젝트를 진행하면서 어려웠던 점은 ~ 이고, 그 것을 ~로 해결하였습니다."
-            isHistory={true}
-          /> */}
         </div>
       </div>
     </HelmetProvider>
