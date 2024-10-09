@@ -1,4 +1,5 @@
 .chat-container {
+  width: var(--card-width);
   display: flex;
   flex-direction: column;
 }
