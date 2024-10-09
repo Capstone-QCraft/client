@@ -4,8 +4,20 @@ import Chat from "../components/Chat";
 import "./HistoryPage.css";
 
 const HistoryPage = () => {
-  const questions = ["질문1", "질문2", "질문3", "질문4", "질문5"];
-  const answers = ["답변1", "답변2", "답변3", "답변4", "답변5"];
+  const questions = [
+    "질문1 : 질문1의 내용을 길게 써보자, 더 길게 써보도록 하자, 너비의 길이는?",
+    "질문2",
+    "질문3",
+    "질문4",
+    "질문5",
+  ];
+  const answers = [
+    "답변1: 답변1의 내용을 길게 써보자, 더 길게 써보도록 하자, 너비의 길이는?",
+    "답변2",
+    "답변3",
+    "답변4",
+    "답변5",
+  ];
   return (
     <HelmetProvider>
       <Helmet>

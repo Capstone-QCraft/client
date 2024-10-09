@@ -4,11 +4,11 @@
   align-items: center;
   height: 100vh;
   position: relative;
-  margin: 20px;
+  /* margin: 20px; */
 }
 
 .card {
-  width: var(--card-width);
+  width: var(--info-container-width);
   box-sizing: border-box;
   height: 550px;
   padding: 20px;

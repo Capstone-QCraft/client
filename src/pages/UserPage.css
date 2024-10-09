@@ -3,6 +3,10 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  /* 중앙 정렬 */
+  height: calc(100vh - var(--nav-height));
+  justify-content: center;
 }
 
 .user-hr {
