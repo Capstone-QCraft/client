@@ -15,7 +15,7 @@ enum DEVICE_TYPE {
 const NavItems = [
   ["소개", "/"],
   ["AI질문", "/ai"],
-  ["기록", "/history"],
+  ["기록", "/histories"],
   ["내정보", "/user"],
 ];
 
@@ -167,7 +167,7 @@ const NavBar = () => {
       return navDesktop();
     }
   } else {
-    return <></>;
+    return null;
   }
 };
 
