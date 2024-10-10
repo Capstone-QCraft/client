@@ -1,0 +1,10 @@
+.histories-container {
+  width: 100%;
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  justify-content: center;
+}
+
+.histories-inner {
+  width: var(--card-width);
+}
