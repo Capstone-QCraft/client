@@ -9,6 +9,13 @@
   font-size: 20px;
 }
 
+.discription-button-inner {
+  margin: 100px 5%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
 .discription-button {
   width: 250px;
   height: 100px;

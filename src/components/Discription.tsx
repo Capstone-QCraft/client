@@ -18,7 +18,7 @@ const Discription: React.FC<DiscriptionProps> = ({ h1, ps, btn, onClick }) => {
       </div>
 
       {btn && onClick && (
-        <div className="discription-inner">
+        <div className="discription-button-inner">
           <button className="discription-button" onClick={onClick}>
             {btn}
           </button>
