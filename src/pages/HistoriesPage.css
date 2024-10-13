@@ -7,4 +7,29 @@
 
 .histories-inner {
   width: var(--card-width);
+  /* display: flex; */
+  justify-content: center;
+}
+
+.list-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: gainsboro; */
+  margin: 5px;
+  box-sizing: border-box;
+  height: 30px;
+  width: 30px;
+  border-radius: 10px;
+  cursor: pointer;
 }
