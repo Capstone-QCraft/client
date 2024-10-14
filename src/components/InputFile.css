@@ -3,7 +3,6 @@
   padding: 10px 20px;
   width: 100%;
   cursor: pointer;
-  background-color: var(--input-file-bg);
   border-radius: 5px;
   border: 2px dashed var(--input-file-border);
   overflow: hidden;
@@ -16,6 +15,7 @@
 
 .custom-file-upload:hover {
   border-color: var(--input-file-border-hover);
+  color: var(--input-file-border-hover);
 }
 
 .file-input {
