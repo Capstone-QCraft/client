@@ -4,6 +4,7 @@ import "./LoginPage.css";
 import InputField from "../components/InputField";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
+import useEmailCkeck from "../hooks/useFetchUser";
 
 enum ErrorMessages {
   EMPTY = "",
@@ -46,11 +47,11 @@ const LoginPage = () => {
   const signupPasswordCheckRef = useRef<HTMLInputElement>(null);
 
   // 비밀번호 조건
-  const [over8, setOver8] = useState(false);
-  const [useUpperCase, setUseUpperCase] = useState(false);
-  const [useLowerCase, setUseLowerCase] = useState(false);
-  const [useNumber, setUseNumber] = useState(false);
-  const [useSpecial, setUseSpecial] = useState(false);
+  const [over8, setOver8] = useState(false); // 8자 이상
+  const [useUpperCase, setUseUpperCase] = useState(false); // 대문자 사용
+  const [useLowerCase, setUseLowerCase] = useState(false); // 소문자 사용
+  const [useNumber, setUseNumber] = useState(false); // 숫자 사용
+  const [useSpecial, setUseSpecial] = useState(false); // 특수문자 사용
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -89,6 +90,7 @@ const LoginPage = () => {
   const handleSendNumber = (e: React.FormEvent) => {
     e.preventDefault();
     // todo 인증번호 전송 로직
+    // const { data, isLoading, isError } = useEmailCkeck("yp071704@naver.com");
   };
 
   const handleAuthNumber = (e: React.FormEvent) => {
