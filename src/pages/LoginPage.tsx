@@ -53,6 +53,8 @@ const LoginPage = () => {
   const [useNumber, setUseNumber] = useState(false); // 숫자 사용
   const [useSpecial, setUseSpecial] = useState(false); // 특수문자 사용
 
+  const { data, isLoading, isError, refetch } = useEmailCkeck(signupEmail);
+
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
@@ -87,10 +89,11 @@ const LoginPage = () => {
     }
   };
 
-  const handleSendNumber = (e: React.FormEvent) => {
+  const handleSendNumber = async (e: React.FormEvent) => {
     e.preventDefault();
+    await refetch();
+    await console.log(data);
     // todo 인증번호 전송 로직
-    // const { data, isLoading, isError } = useEmailCkeck("yp071704@naver.com");
   };
 
   const handleAuthNumber = (e: React.FormEvent) => {
