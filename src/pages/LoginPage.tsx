@@ -4,47 +4,64 @@ import "./LoginPage.css";
 import InputField from "../components/InputField";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
-import useEmailCkeck from "../hooks/useFetchUser";
+import useEmailCkeck from "../hooks/useEmailCheck";
+import useEmailSend from "../hooks/useEmailSend";
+import useAuthNumCheck from "../hooks/useAuthNumCheck";
+import { validation } from "../utils/validation";
+import useSignUp from "../hooks/useSignUp";
 
 enum ErrorMessages {
   EMPTY = "",
-  EMAIL_EMPTY = "이메일을 입력해 주세요.",
-  PASSWORD_EMPTY = "비밀번호를 입력해 주세요.",
-  FAILED_LOGIN = "이메일 또는 비밀번호가 잘못 되었습니다. 이메일과 비밀번호를 정확히 입력해 주세요.",
-  NAME_EMPTY = "이름을 입력해 주세요.",
-}
 
-enum INPUT_LENGTH {
-  NAME = 20,
-  EMAIL = 40,
-  PASSWORD = 20,
-  NUMBER = 4,
+  FAILED_LOGIN = "이메일 또는 비밀번호가 잘못 되었습니다. 이메일과 비밀번호를 정확히 입력해 주세요.",
+
+  NAME_EMPTY = "이름을 입력해 주세요.",
+  EMAIL_EMPTY = "이메일을 입력해 주세요.",
+  NUMBER_EMPTY = "인증번호를 입력해 주세요.",
+  PASSWORD_EMPTY = "비밀번호를 입력해 주세요.",
+  INVALID_AUTH_NUMBER = "인증번호가 유효하지 않습니다.",
+  PASSWORD_CHECK_EMPTY = "비밀번호 확인을 입력해 주세요.",
+  INVALID_EMAIL_FORMAT = "잘못된 이메일 형식입니다.",
+  REQUIRES_DUPLICATE_EMAIL_CHECK = "이메일 중복 확인이 필요합니다.",
+  REQUIRES_AUTH = "인증을 완료해 주세요.",
+  PASSWORD_REGEX = "8~20자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.",
 }
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [signupName, setSignupName] = useState("");
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupNumber, setSignupNumber] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-  const [signupPasswordCheck, setSignupPasswordCheck] = useState("");
+  // input fields
+  const [loginEmail, setLoginEmail] = useState(""); // 로그인 이메일
+  const [loginPassword, setLoginPassword] = useState(""); // 로그인 패스워드
+  const [signupName, setSignupName] = useState(""); // 회원가입 이름
+  const [signupEmail, setSignupEmail] = useState(""); // 회원가입 이메일
+  const [signupNumber, setSignupNumber] = useState(""); // 회원가입 인증번호
+  const [signupPassword, setSignupPassword] = useState(""); // 회원가입 비밀번호
+  const [signupPasswordCheck, setSignupPasswordCheck] = useState(""); // 회원가입 비밀번호 확인
 
+  const dispatch = useDispatch();
+
+  const [isFlipped, setIsFlipped] = useState(false); // 로그인, 회원가입 창 토글
+  const [duplicationCheck, setDuplicationCheck] = useState(false); // 이메일 중복 확인 여부
+  const [sendEmail, setSendEmail] = useState(false); // 인증 이메일 전송 여부
+  const [numberAuth, setNumberAuth] = useState(false); // 인증 완료 여부
   const [loginErrorMessage, setLoginErrorMessage] = useState(
     ErrorMessages.EMPTY
-  );
+  ); // 로그인 에러 메시지
   const [signupErrorMessage, setSignupErrorMessage] = useState(
     ErrorMessages.EMPTY
-  );
-  const loginEmailRef = useRef<HTMLInputElement>(null);
-  const loginPasswordRef = useRef<HTMLInputElement>(null);
-  const signupNameRef = useRef<HTMLInputElement>(null);
-  const signupEmailRef = useRef<HTMLInputElement>(null);
-  const signupNumbereRef = useRef<HTMLInputElement>(null);
-  const signupPasswordeRef = useRef<HTMLInputElement>(null);
-  const signupPasswordCheckRef = useRef<HTMLInputElement>(null);
+  ); // 회원가입 에러 메시지
+
+  // input focus, disable 위한 ref
+  const loginEmailRef = useRef<HTMLInputElement>(null); // 로그인 이메일
+  const loginPasswordRef = useRef<HTMLInputElement>(null); // 로그인 패스워드
+  const signupNameRef = useRef<HTMLInputElement>(null); // 회원가입 이름
+  const signupEmailRef = useRef<HTMLInputElement>(null); // 회원가입 이메일
+  const signupNumbereRef = useRef<HTMLInputElement>(null); // 회원가입 인증번호
+  const signupPasswordeRef = useRef<HTMLInputElement>(null); // 회원가입 비밀번호
+  const signupPasswordCheckRef = useRef<HTMLInputElement>(null); // 회원가입 비밀번호 확인
+
+  // button disable 위한 ref
+  const duplicationButtonRef = useRef<HTMLButtonElement>(null); // 중복 확인 버튼
+  const authButtonRef = useRef<HTMLButtonElement>(null); // 인증 하기 버튼
 
   // 비밀번호 조건
   const [over8, setOver8] = useState(false); // 8자 이상
@@ -53,12 +70,41 @@ const LoginPage = () => {
   const [useNumber, setUseNumber] = useState(false); // 숫자 사용
   const [useSpecial, setUseSpecial] = useState(false); // 특수문자 사용
 
-  const { data, isLoading, isError, refetch } = useEmailCkeck(signupEmail);
+  // 비밀번호 조건 확인
+  const regexPasswordCheck = (str: string) => {
+    str = validation.regexPassword(str);
+    if (str.length >= 8) setOver8(true);
+    else setOver8(false);
+    if (/[A-Z]/.test(str)) setUseUpperCase(true);
+    else setUseUpperCase(false);
+    if (/[a-z]/.test(str)) setUseLowerCase(true);
+    else setUseLowerCase(false);
+    if (/[0-9]/.test(str)) setUseNumber(true);
+    else setUseNumber(false);
+    if (/[^a-zA-Z0-9\s]/.test(str)) setUseSpecial(true);
+    else setUseSpecial(false);
+    return str;
+  };
 
+  // api
+  const { isSuccess: emailCheckIsSuccess, refetch: emailCheckRefetch } =
+    useEmailCkeck(signupEmail);
+  const { refetch: emailSendRefetch } = useEmailSend(signupEmail);
+  const { isSuccess: numberCheckIsSeccess, refetch: numberCheckRefetch } =
+    useAuthNumCheck(signupEmail, Number(signupNumber));
+  const { isSuccess: signUpIsSuccess, refetch: signUpRefetch } = useSignUp(
+    signupName,
+    signupEmail,
+    signupPassword,
+    Number(signupNumber)
+  );
+
+  // 로그인, 회원가입 창 전환
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
+  // 로그인
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoginErrorMessage(ErrorMessages.EMPTY);
@@ -75,71 +121,110 @@ const LoginPage = () => {
     }
   };
 
-  const handleSignupSubmit = (e: React.FormEvent) => {
+  // 회원가입
+  const handleSignupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSignupErrorMessage(ErrorMessages.EMPTY);
     if (signupName === "") {
+      // 이름 필드가 비어 있다면
       setSignupErrorMessage(ErrorMessages.NAME_EMPTY);
       if (signupNameRef.current) signupNameRef.current.focus();
     } else if (signupEmail === "") {
+      // 이메일 필드가 비어 있다면
       setSignupErrorMessage(ErrorMessages.EMAIL_EMPTY);
       if (signupEmailRef.current) signupEmailRef.current.focus();
+      // 이메일 중복체크 하지 않았다면
+    } else if (!duplicationCheck) {
+      setSignupErrorMessage(ErrorMessages.REQUIRES_DUPLICATE_EMAIL_CHECK);
+      if (duplicationButtonRef.current) duplicationButtonRef.current.focus();
+    } else if (signupNumber === "") {
+      // 인증번호 필드가 비어 있다면
+      setSignupErrorMessage(ErrorMessages.NUMBER_EMPTY);
+      if (signupNumbereRef.current) signupNumbereRef.current.focus();
+    } else if (!numberAuth) {
+      // 인증하기 하지 않았다면
+      setSignupErrorMessage(ErrorMessages.REQUIRES_AUTH);
+      if (authButtonRef.current) authButtonRef.current.focus();
+    } else if (signupPassword === "") {
+      // 비밀번호 필드가 비어 있다면
+      setSignupErrorMessage(ErrorMessages.PASSWORD_EMPTY);
+      if (signupPasswordeRef.current) signupPasswordeRef.current.focus();
+    } else if (
+      !(over8 && useUpperCase && useLowerCase && useNumber && useSpecial)
+    ) {
+      // 비밀번호 형식이 맞지 않다면
+      setSignupErrorMessage(ErrorMessages.PASSWORD_REGEX);
+      if (signupPasswordeRef.current) signupPasswordeRef.current.focus();
+    } else if (signupPasswordCheck === "") {
+      // 비밀번호 확인 필드가 비어 있다면
+      setSignupErrorMessage(ErrorMessages.PASSWORD_CHECK_EMPTY);
+      if (signupPasswordCheckRef.current)
+        signupPasswordCheckRef.current.focus();
     } else {
-      // todo 회원가입 로직
+      // 회원가입 완료 로직
+      await signUpRefetch();
+      if (signUpIsSuccess) {
+        window.location.reload();
+      }
     }
   };
 
+  // 이메일 중복 확인 & 인증 번호 전송
   const handleSendNumber = async (e: React.FormEvent) => {
     e.preventDefault();
-    await refetch();
-    await console.log(data);
-    // todo 인증번호 전송 로직
+    setSignupErrorMessage(ErrorMessages.EMPTY);
+    // 이메일 중복 확인
+    if (!duplicationCheck) {
+      // 이메일 비어있을 경우
+      if (!signupEmail) {
+        if (signupEmailRef.current) signupEmailRef.current.focus();
+        setSignupErrorMessage(ErrorMessages.EMAIL_EMPTY);
+        return;
+      }
+      // 이메일 형식에 맞지 않을 경우
+      if (!validation.isValidEmail(signupEmail)) {
+        if (signupEmailRef.current) signupEmailRef.current.focus();
+        setSignupErrorMessage(ErrorMessages.INVALID_EMAIL_FORMAT);
+        return;
+      }
+      // 이메일 중복 확인 api 실행
+      await emailCheckRefetch();
+      if (emailCheckIsSuccess) {
+        if (signupEmailRef.current) signupEmailRef.current.disabled = true;
+        setDuplicationCheck(true);
+      } else {
+        // 중복 되었을 경우 success로 되려나
+      }
+
+      // 인증 번호 전송
+    } else {
+      emailSendRefetch();
+      setSendEmail(true);
+      // todo 재전송 버튼 클릭 가능 딜레이
+    }
   };
 
-  const handleAuthNumber = (e: React.FormEvent) => {
+  // 인증 번호 확인
+  const handleAuthNumber = async (e: React.FormEvent) => {
     e.preventDefault();
-    // todo 인증번호 인증 로직
-  };
-
-  const regexName = (str: string) => {
-    str = str.replace(/[^a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]/g, "");
-    if (str.length > INPUT_LENGTH.NAME) str = str.slice(0, INPUT_LENGTH.NAME);
-    return str;
-  };
-  const regexEmail = (str: string) => {
-    str = str.toLowerCase();
-    str = str.replace(/[^a-z0-9@.]/g, "");
-    if (str.length > INPUT_LENGTH.EMAIL) str = str.slice(0, INPUT_LENGTH.EMAIL);
-    return str;
-  };
-  const regexPassword = (str: string) => {
-    // 정규식 백엔드와 맞춰보기
-    // 한글 -> 영어, D는 쌍ㅇ 없어서 일단 보류
-    str = str.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\s]/g, "");
-    if (str.length > INPUT_LENGTH.PASSWORD)
-      str = str.slice(0, INPUT_LENGTH.PASSWORD);
-    return str;
-  };
-  const regexPasswordCheck = (str: string) => {
-    str = regexPassword(str);
-    if (str.length >= 8) setOver8(true);
-    else setOver8(false);
-    if (/[A-Z]/.test(str)) setUseUpperCase(true);
-    else setUseUpperCase(false);
-    if (/[a-z]/.test(str)) setUseLowerCase(true);
-    else setUseLowerCase(false);
-    if (/[0-9]/.test(str)) setUseNumber(true);
-    else setUseNumber(false);
-    if (/[^a-zA-Z0-9\s]/.test(str)) setUseSpecial(true);
-    else setUseSpecial(false);
-    return str;
-  };
-  const regexNumber = (str: string) => {
-    // todo 한글자 완성전 글자가 잠시 들어가짐
-    str = str.replace(/[^0-9]/g, "");
-    if (str.length > INPUT_LENGTH.NUMBER)
-      str = str.slice(0, INPUT_LENGTH.NUMBER);
-    return str;
+    setSignupErrorMessage(ErrorMessages.EMPTY);
+    // 인증번호 필드가 비어 있다면
+    if (signupNumber === "") {
+      setSignupErrorMessage(ErrorMessages.NUMBER_EMPTY);
+      if (signupNumbereRef.current) signupNumbereRef.current.focus();
+      return;
+    }
+    await numberCheckRefetch();
+    if (numberCheckIsSeccess) {
+      setNumberAuth(true);
+      if (signupNumbereRef.current) signupNumbereRef.current.disabled = true;
+      if (duplicationButtonRef.current)
+        duplicationButtonRef.current.disabled = true;
+      if (authButtonRef.current) authButtonRef.current.disabled = true;
+    } else {
+      setSignupErrorMessage(ErrorMessages.INVALID_AUTH_NUMBER);
+      if (signupNumbereRef.current) signupNumbereRef.current.focus();
+    }
   };
 
   return (
@@ -162,14 +247,18 @@ const LoginPage = () => {
               label="이메일"
               type="email"
               value={loginEmail}
-              onChange={(e) => setLoginEmail(regexEmail(e.target.value))}
+              onChange={(e) =>
+                setLoginEmail(validation.regexEmail(e.target.value))
+              }
               inputRef={loginEmailRef}
             />
             <InputField
               label="비밀번호"
               type="password"
               value={loginPassword}
-              onChange={(e) => setLoginPassword(regexPassword(e.target.value))}
+              onChange={(e) =>
+                setLoginPassword(validation.regexPassword(e.target.value))
+              }
               inputRef={loginPasswordRef}
             />
             <p className="error-message">{loginErrorMessage}</p>
@@ -201,7 +290,9 @@ const LoginPage = () => {
               label="이름"
               type="text"
               value={signupName}
-              onChange={(e) => setSignupName(regexName(e.target.value))}
+              onChange={(e) =>
+                setSignupName(validation.regexName(e.target.value))
+              }
               inputRef={signupNameRef}
             />
             <div className="input-with-button">
@@ -209,11 +300,21 @@ const LoginPage = () => {
                 label="이메일"
                 type="email"
                 value={signupEmail}
-                onChange={(e) => setSignupEmail(regexEmail(e.target.value))}
+                onChange={(e) =>
+                  setSignupEmail(validation.regexEmail(e.target.value))
+                }
                 inputRef={signupEmailRef}
               />
-              <button className="auth-button" onClick={handleSendNumber}>
-                인증번호 발송
+              <button
+                className="auth-button"
+                onClick={handleSendNumber}
+                ref={duplicationButtonRef}
+              >
+                {duplicationCheck
+                  ? sendEmail
+                    ? "재전송"
+                    : "인증번호 전송"
+                  : "중복 확인"}
               </button>
             </div>
             <div className="input-with-button">
@@ -221,11 +322,17 @@ const LoginPage = () => {
                 label="인증번호"
                 type="number"
                 value={signupNumber}
-                onChange={(e) => setSignupNumber(regexNumber(e.target.value))}
+                onChange={(e) =>
+                  setSignupNumber(validation.regexNumber(e.target.value))
+                }
                 inputRef={signupNumbereRef}
               />
-              <button className="auth-button" onClick={handleAuthNumber}>
-                인증하기
+              <button
+                className="auth-button"
+                onClick={handleAuthNumber}
+                ref={authButtonRef}
+              >
+                {numberAuth ? "완료" : "인증하기"}
               </button>
             </div>
             <InputField
@@ -249,7 +356,7 @@ const LoginPage = () => {
               type="password"
               value={signupPasswordCheck}
               onChange={(e) =>
-                setSignupPasswordCheck(regexPassword(e.target.value))
+                setSignupPasswordCheck(validation.regexPassword(e.target.value))
               }
               inputRef={signupPasswordCheckRef}
             />
