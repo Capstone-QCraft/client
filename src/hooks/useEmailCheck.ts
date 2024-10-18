@@ -6,6 +6,7 @@ const useEmailCkeck = (email: string) => {
         queryKey: ['emailCheck', email],
         queryFn: () => userApi.emailCheck(email).then(res => res.data),
         enabled: false,
+        retry: false,
     });
 };
 

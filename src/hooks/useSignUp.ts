@@ -3,7 +3,7 @@ import { userApi } from '../api';
 
 const useSignUp = (name: string, email: string, password: string, authNum: number) => {
     return useQuery({
-        queryKey: ['useSignUp', email],
+        queryKey: ['signUp', email],
         queryFn: () => userApi.signUp(name, email, password, authNum).then(res => res.data),
         enabled: false,
     });

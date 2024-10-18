@@ -34,6 +34,13 @@ const signUp = (name: string, email: string, password: string, authNum: number) 
     });
 };
 
+// 로그인
+const signIn = (email: string, password: string) => {
+    return axios.post(`${apiUrl}/member/sign-in`, {
+        email,
+        password,
+    });
+};
 
 
 export const userApi = {
@@ -41,4 +48,5 @@ export const userApi = {
     emailSend,
     authNumCheck,
     signUp,
+    signIn,
 };

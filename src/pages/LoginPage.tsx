@@ -9,6 +9,7 @@ import useEmailSend from "../hooks/useEmailSend";
 import useAuthNumCheck from "../hooks/useAuthNumCheck";
 import { validation } from "../utils/validation";
 import useSignUp from "../hooks/useSignUp";
+import useSignIn from "../hooks/useSignIn";
 
 enum ErrorMessages {
   EMPTY = "",
@@ -19,6 +20,7 @@ enum ErrorMessages {
   EMAIL_EMPTY = "이메일을 입력해 주세요.",
   NUMBER_EMPTY = "인증번호를 입력해 주세요.",
   PASSWORD_EMPTY = "비밀번호를 입력해 주세요.",
+  UNAVAILABLE_EMAIL = "사용할 수 없는 이메일입니다. 다른 이메일을 입력해 주세요.",
   INVALID_AUTH_NUMBER = "인증번호가 유효하지 않습니다.",
   PASSWORD_CHECK_EMPTY = "비밀번호 확인을 입력해 주세요.",
   INVALID_EMAIL_FORMAT = "잘못된 이메일 형식입니다.",
@@ -87,17 +89,19 @@ const LoginPage = () => {
   };
 
   // api
-  const { isSuccess: emailCheckIsSuccess, refetch: emailCheckRefetch } =
-    useEmailCkeck(signupEmail);
+  const { refetch: emailCheckRefetch } = useEmailCkeck(signupEmail);
   const { refetch: emailSendRefetch } = useEmailSend(signupEmail);
-  const { isSuccess: numberCheckIsSeccess, refetch: numberCheckRefetch } =
-    useAuthNumCheck(signupEmail, Number(signupNumber));
-  const { isSuccess: signUpIsSuccess, refetch: signUpRefetch } = useSignUp(
+  const { refetch: numberCheckRefetch } = useAuthNumCheck(
+    signupEmail,
+    Number(signupNumber)
+  );
+  const { refetch: signUpRefetch } = useSignUp(
     signupName,
     signupEmail,
     signupPassword,
     Number(signupNumber)
   );
+  const { refetch: SignInRefetch } = useSignIn(loginEmail, loginPassword);
 
   // 로그인, 회원가입 창 전환
   const handleFlip = () => {
@@ -105,19 +109,21 @@ const LoginPage = () => {
   };
 
   // 로그인
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginErrorMessage(ErrorMessages.EMPTY);
     if (loginEmail === "") {
+      // 이메일 필드가 비어 있다면
       setLoginErrorMessage(ErrorMessages.EMAIL_EMPTY);
       if (loginEmailRef.current) loginEmailRef.current.focus();
     } else if (loginPassword === "") {
+      // 비밀번호 필드가 비어 있다면
       setLoginErrorMessage(ErrorMessages.PASSWORD_EMPTY);
       if (loginPasswordRef.current) loginPasswordRef.current.focus();
     } else {
-      // 로그인 로직 처리
-      // setLoginErrorMessage(ErrorMessages.FAILED_LOGIN);
-      dispatch(login());
+      const { isSuccess } = await SignInRefetch();
+      if (isSuccess) dispatch(login()); // 로그인 성공
+      else setLoginErrorMessage(ErrorMessages.FAILED_LOGIN); // 로그인 실패
     }
   };
 
@@ -162,8 +168,8 @@ const LoginPage = () => {
         signupPasswordCheckRef.current.focus();
     } else {
       // 회원가입 완료 로직
-      await signUpRefetch();
-      if (signUpIsSuccess) {
+      const { isSuccess } = await signUpRefetch();
+      if (isSuccess) {
         window.location.reload();
       }
     }
@@ -188,12 +194,14 @@ const LoginPage = () => {
         return;
       }
       // 이메일 중복 확인 api 실행
-      await emailCheckRefetch();
-      if (emailCheckIsSuccess) {
+      const { isSuccess } = await emailCheckRefetch();
+      if (isSuccess) {
         if (signupEmailRef.current) signupEmailRef.current.disabled = true;
         setDuplicationCheck(true);
       } else {
-        // 중복 되었을 경우 success로 되려나
+        // 사용 불가능한 이메일
+        if (signupEmailRef.current) signupEmailRef.current.focus();
+        setSignupErrorMessage(ErrorMessages.UNAVAILABLE_EMAIL);
       }
 
       // 인증 번호 전송
@@ -214,14 +222,16 @@ const LoginPage = () => {
       if (signupNumbereRef.current) signupNumbereRef.current.focus();
       return;
     }
-    await numberCheckRefetch();
-    if (numberCheckIsSeccess) {
+    const { isSuccess } = await numberCheckRefetch();
+    if (isSuccess) {
+      // 인증 번호 인증 성공
       setNumberAuth(true);
       if (signupNumbereRef.current) signupNumbereRef.current.disabled = true;
       if (duplicationButtonRef.current)
         duplicationButtonRef.current.disabled = true;
       if (authButtonRef.current) authButtonRef.current.disabled = true;
     } else {
+      // 인증 번호 인증 실패
       setSignupErrorMessage(ErrorMessages.INVALID_AUTH_NUMBER);
       if (signupNumbereRef.current) signupNumbereRef.current.focus();
     }
