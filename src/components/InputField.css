@@ -42,6 +42,12 @@
   background-color: var(--login-bg-color);
 }
 
+.input-field:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f0f0f0;
+}
+
 .input-field:focus {
   outline: none;
   border: 3px solid var(--login-input-focused-border-color);

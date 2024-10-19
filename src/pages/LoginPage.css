@@ -91,6 +91,15 @@
   background-color: var(--discription-button-bg-color);
 }
 
+.auth-button:focus {
+  outline: 2px solid var(--login-password-look-color);
+}
+
+.auth-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .auth-button:hover {
 }
 
