@@ -11,6 +11,8 @@ import { validation } from "../utils/validation";
 import useSignUp from "../hooks/useSignUp";
 import useSignIn from "../hooks/useSignIn";
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
 enum ErrorMessages {
   EMPTY = "",
 
@@ -280,9 +282,9 @@ const LoginPage = () => {
           <hr />
           <p>간편 로그인</p>
           <div>
+            <a href={SERVER_URL + "/member/oauth2/kakao"}>카카오</a>
             <p>네이버</p>
             <p>구글</p>
-            <p>카카오</p>
           </div>
         </div>
 
