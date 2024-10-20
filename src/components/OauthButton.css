@@ -1,0 +1,25 @@
+.oauth-button-container {
+  border-radius: 12px;
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.kakao {
+  background-color: #fee500;
+  color: #000000 85%;
+}
+
+.google {
+  /* background-color: #ffffff; */
+  background-color: violet;
+  color: #000000 85%;
+}
+
+.naver {
+  background-color: #03c75a;
+  color: #000000 85%;
+}

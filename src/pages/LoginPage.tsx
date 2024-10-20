@@ -11,6 +11,9 @@ import { validation } from "../utils/validation";
 import useSignUp from "../hooks/useSignUp";
 import useSignIn from "../hooks/useSignIn";
 
+import kakao from "../assets/images/kakao.png";
+import OauthButton from "../components/OauthButton";
+
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 enum ErrorMessages {
@@ -280,11 +283,20 @@ const LoginPage = () => {
           </form>
           {/* <a>비밀번호 찾기</a> */}
           <hr />
-          <p>간편 로그인</p>
+          <p className="auth-title">간편 로그인</p>
           <div>
-            <a href={SERVER_URL + "/member/oauth2/kakao"}>카카오</a>
-            <p>네이버</p>
-            <p>구글</p>
+            <OauthButton type="kakao" />
+            <OauthButton type="google" />
+            <OauthButton type="naver" />
+            {/* <a href={SERVER_URL + "/member/oauth2/kakao"}>
+              <img src={kakao} alt="kakao" />
+            </a>
+            <a href={SERVER_URL + "/member/oauth2/google"}>
+              <img src={kakao} alt="kakao" />
+            </a>
+            <a href={SERVER_URL + "/member/oauth2/naver"}>
+              <img src={kakao} alt="kakao" />
+            </a> */}
           </div>
         </div>
 
