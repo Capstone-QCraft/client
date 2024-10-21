@@ -5,7 +5,6 @@ import useGetInfo from "../hooks/useGetInfo";
 
 const UserPage = () => {
   const { data } = useGetInfo();
-
   return (
     <HelmetProvider>
       <Helmet>
@@ -21,10 +20,14 @@ const UserPage = () => {
         ></Information>
         <Information
           h2="계정 관리"
-          contents={[
-            ["비밀번호", "변경"],
-            ["회원", "탈퇴"],
-          ]}
+          contents={
+            data?.type === "email"
+              ? [
+                  ["비밀번호", "변경"],
+                  ["회원", "탈퇴"],
+                ]
+              : [["회원", "탈퇴"]]
+          }
         ></Information>
       </div>
     </HelmetProvider>

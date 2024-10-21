@@ -5,7 +5,7 @@
   width: 100%;
 
   /* 중앙 정렬 */
-  height: calc(100vh - var(--nav-height));
+  /* height: calc(100vh - var(--nav-height)); */
   justify-content: center;
 }
 

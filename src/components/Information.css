@@ -35,3 +35,35 @@
   margin: 0;
   padding: 0;
 }
+
+.password-change-container {
+  margin: 0 10px 15px 10px;
+  animation: slideDown 0.3s ease-in-out;
+  justify-content: center;
+}
+
+.withdraw-confirm-container {
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 100px;
+  }
+}
+
+.withdraw-button {
+  width: 100%;
+  height: 40px;
+  background-color: var(--nav-logout-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  /* padding: 10px 20px; */
+  cursor: pointer;
+}

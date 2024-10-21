@@ -10,11 +10,9 @@ import useAuthNumCheck from "../hooks/useAuthNumCheck";
 import { validation } from "../utils/validation";
 import useSignUp from "../hooks/useSignUp";
 import useSignIn from "../hooks/useSignIn";
-
-import kakao from "../assets/images/kakao.png";
 import OauthButton from "../components/OauthButton";
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+import saveToken from "../utils/saveToken";
+import PasswordCondition, { regexTF } from "../components/PasswordCondition";
 
 enum ErrorMessages {
   EMPTY = "",
@@ -32,6 +30,7 @@ enum ErrorMessages {
   REQUIRES_DUPLICATE_EMAIL_CHECK = "이메일 중복 확인이 필요합니다.",
   REQUIRES_AUTH = "인증을 완료해 주세요.",
   PASSWORD_REGEX = "8~20자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.",
+  PASSWORD_MISSMATCH = "비밀번호가 일치하지 않습니다.",
 }
 
 const LoginPage = () => {
@@ -70,29 +69,6 @@ const LoginPage = () => {
   const duplicationButtonRef = useRef<HTMLButtonElement>(null); // 중복 확인 버튼
   const authButtonRef = useRef<HTMLButtonElement>(null); // 인증 하기 버튼
 
-  // 비밀번호 조건
-  const [over8, setOver8] = useState(false); // 8자 이상
-  const [useUpperCase, setUseUpperCase] = useState(false); // 대문자 사용
-  const [useLowerCase, setUseLowerCase] = useState(false); // 소문자 사용
-  const [useNumber, setUseNumber] = useState(false); // 숫자 사용
-  const [useSpecial, setUseSpecial] = useState(false); // 특수문자 사용
-
-  // 비밀번호 조건 확인
-  const regexPasswordCheck = (str: string) => {
-    str = validation.regexPassword(str);
-    if (str.length >= 8) setOver8(true);
-    else setOver8(false);
-    if (/[A-Z]/.test(str)) setUseUpperCase(true);
-    else setUseUpperCase(false);
-    if (/[a-z]/.test(str)) setUseLowerCase(true);
-    else setUseLowerCase(false);
-    if (/[0-9]/.test(str)) setUseNumber(true);
-    else setUseNumber(false);
-    if (/[^a-zA-Z0-9\s]/.test(str)) setUseSpecial(true);
-    else setUseSpecial(false);
-    return str;
-  };
-
   // api
   const { refetch: emailCheckRefetch } = useEmailCkeck(signupEmail);
   const { refetch: emailSendRefetch } = useEmailSend(signupEmail);
@@ -126,9 +102,11 @@ const LoginPage = () => {
       setLoginErrorMessage(ErrorMessages.PASSWORD_EMPTY);
       if (loginPasswordRef.current) loginPasswordRef.current.focus();
     } else {
-      const { isSuccess } = await SignInRefetch();
-      if (isSuccess) dispatch(login()); // 로그인 성공
-      else setLoginErrorMessage(ErrorMessages.FAILED_LOGIN); // 로그인 실패
+      const { data, isSuccess } = await SignInRefetch();
+      if (isSuccess) {
+        saveToken(data.accessToken);
+        dispatch(login()); // 로그인 성공
+      } else setLoginErrorMessage(ErrorMessages.FAILED_LOGIN); // 로그인 실패
     }
   };
 
@@ -160,15 +138,18 @@ const LoginPage = () => {
       // 비밀번호 필드가 비어 있다면
       setSignupErrorMessage(ErrorMessages.PASSWORD_EMPTY);
       if (signupPasswordeRef.current) signupPasswordeRef.current.focus();
-    } else if (
-      !(over8 && useUpperCase && useLowerCase && useNumber && useSpecial)
-    ) {
+    } else if (!regexTF(signupPassword)) {
       // 비밀번호 형식이 맞지 않다면
       setSignupErrorMessage(ErrorMessages.PASSWORD_REGEX);
       if (signupPasswordeRef.current) signupPasswordeRef.current.focus();
     } else if (signupPasswordCheck === "") {
       // 비밀번호 확인 필드가 비어 있다면
       setSignupErrorMessage(ErrorMessages.PASSWORD_CHECK_EMPTY);
+      if (signupPasswordCheckRef.current)
+        signupPasswordCheckRef.current.focus();
+    } else if (signupPassword !== signupPasswordCheck) {
+      // 비밀번호와 비밀번호 확인이 같지 않다면
+      setSignupErrorMessage(ErrorMessages.PASSWORD_MISSMATCH);
       if (signupPasswordCheckRef.current)
         signupPasswordCheckRef.current.focus();
     } else {
@@ -357,17 +338,12 @@ const LoginPage = () => {
               type="password"
               value={signupPassword}
               onChange={(e) =>
-                setSignupPassword(regexPasswordCheck(e.target.value))
+                setSignupPassword(validation.regexPassword(e.target.value))
               }
               inputRef={signupPasswordeRef}
             />
-            <div className="password-condition-container">
-              <p style={over8 ? { color: "green" } : {}}>8자 이상</p>
-              <p style={useUpperCase ? { color: "green" } : {}}>대문자</p>
-              <p style={useLowerCase ? { color: "green" } : {}}>소문자</p>
-              <p style={useNumber ? { color: "green" } : {}}>숫자</p>
-              <p style={useSpecial ? { color: "green" } : {}}>특수문자(~)</p>
-            </div>
+            <PasswordCondition password={signupPassword} />
+
             <InputField
               label="비밀번호 확인"
               type="password"
