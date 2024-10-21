@@ -1,9 +1,11 @@
-import React from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Information from "../components/Information";
 import "./UserPage.css";
+import useGetInfo from "../hooks/useGetInfo";
 
 const UserPage = () => {
+  const { data } = useGetInfo();
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -13,8 +15,8 @@ const UserPage = () => {
         <Information
           h2="계정 정보"
           contents={[
-            ["이름", "양정운"],
-            ["이메일", "yp071704@naver.com"],
+            ["이름", data?.name],
+            ["이메일", data?.email],
           ]}
         ></Information>
         <Information
