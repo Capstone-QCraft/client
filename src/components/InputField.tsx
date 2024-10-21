@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./InputField.css";
 
 interface InputFieldProps {
+  name?: string;
   label: string;
   type: string;
   value: string;
@@ -10,6 +11,7 @@ interface InputFieldProps {
 }
 
 const InputField: React.FC<InputFieldProps> = ({
+  name,
   label,
   type,
   value,
@@ -27,6 +29,7 @@ const InputField: React.FC<InputFieldProps> = ({
     <div className={`input-container ${focused || value ? "focused" : ""}`}>
       <div className="input-wrapper">
         <input
+          name={name}
           type={inputType}
           value={value}
           onFocus={() => setFocused(true)}

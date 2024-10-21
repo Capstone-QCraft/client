@@ -259,6 +259,7 @@ const LoginPage = () => {
           <h1>로그인</h1>
           <form onSubmit={handleLoginSubmit}>
             <InputField
+              name="email"
               label="이메일"
               type="email"
               value={loginEmail}
@@ -268,6 +269,7 @@ const LoginPage = () => {
               inputRef={loginEmailRef}
             />
             <InputField
+              name="password"
               label="비밀번호"
               type="password"
               value={loginPassword}
@@ -288,15 +290,6 @@ const LoginPage = () => {
             <OauthButton type="kakao" />
             <OauthButton type="google" />
             <OauthButton type="naver" />
-            {/* <a href={SERVER_URL + "/member/oauth2/kakao"}>
-              <img src={kakao} alt="kakao" />
-            </a>
-            <a href={SERVER_URL + "/member/oauth2/google"}>
-              <img src={kakao} alt="kakao" />
-            </a>
-            <a href={SERVER_URL + "/member/oauth2/naver"}>
-              <img src={kakao} alt="kakao" />
-            </a> */}
           </div>
         </div>
 

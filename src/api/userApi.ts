@@ -46,7 +46,6 @@ const signIn = (email: string, password: string) => {
 // 회원 정보
 const getInfo = async () => {
     const token = await Cookies.get('access_token');
-    console.log(token)
     return axios.get(`${SERVER_URL}/member/get-info`,
         {
             headers: {

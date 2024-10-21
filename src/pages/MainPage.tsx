@@ -10,6 +10,8 @@ import InputField from "../components/InputField";
 import InputFile from "../components/InputFile";
 import Button from "../components/Button";
 
+import useFileUpload from "../hooks/useFileUpload";
+
 const MainPage = () => {
   const navigate = useNavigate();
 
@@ -41,6 +43,8 @@ const MainPage = () => {
     } else navigate("/login");
   };
 
+  const { refetch } = useFileUpload(selectedFile as File);
+
   const jobRef = useRef<HTMLInputElement>(null);
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,6 +54,8 @@ const MainPage = () => {
       // 입력된 파일 없을 때
     } else {
       // ai 페이지로 가는 로직
+      refetch();
+      navigate("/ai");
     }
   };
 

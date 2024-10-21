@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import logoLight from "../assets/images/logo-light.png";
 import logoDark from "../assets/images/logo-dark.png";
@@ -21,6 +21,7 @@ const NavItems = [
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -63,6 +64,7 @@ const NavBar = () => {
           onClick={() => {
             navMenuListHandler();
             dispatch(logout());
+            navigate("/");
           }}
         >
           로그아웃
