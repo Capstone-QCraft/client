@@ -40,7 +40,7 @@ const HistoriesPage = () => {
             <div>파일</div>
           </div>
           {data.map((v, i) => (
-            <div className="list-container">
+            <div key={i} className="list-container">
               <div>{v.date}</div>
               <div>{v.job}</div>
               <div>{v.file}</div>
