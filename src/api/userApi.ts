@@ -54,10 +54,28 @@ const getInfo = async () => {
         });
 };
 
-// todo 비밀번호 변경
+// 회원정보 변경
+const updateInfo = async (email: string, name: string, oldPassword: string, newPassword: string) => {
+    const token = await Cookies.get('access_token');
+    return axios.put(`${SERVER_URL}/member/update-info`,
+        { email, name, oldPassword, newPassword },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+};
 
 // todo 회원 탈퇴
-
+const withdraw = async () => {
+    const token = await Cookies.get('access_token');
+    return axios.delete(`${SERVER_URL}/member/withdraw`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+};
 
 export const userApi = {
     emailCheck,
@@ -66,4 +84,6 @@ export const userApi = {
     signUp,
     signIn,
     getInfo,
+    updateInfo,
+    withdraw,
 };
