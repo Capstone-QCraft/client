@@ -11,25 +11,70 @@
   justify-content: center;
 }
 
-.list-container {
+.list-header,
+.list-body {
   display: flex;
-  justify-content: space-between;
+  position: relative;
+  border-bottom: 1px solid rgb(226, 227, 225);
+  height: 50px;
+  font-size: 20px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.list-header {
+  font-weight: bold;
+}
+
+.list-body {
+  cursor: pointer;
+}
+
+.list-body:hover {
+  background-color: #dff2eb;
+}
+
+.t1,
+.t2,
+.t3 {
+  text-align: center;
+  overflow: hidden;
+  margin: 5px;
+}
+.t1 {
+  width: 15%;
+}
+.t2 {
+  width: 55%;
+}
+.t3 {
+  width: 30%;
 }
 
 .pagination-container {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .pagination-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: gainsboro; */
   margin: 5px;
   box-sizing: border-box;
   height: 30px;
-  width: 30px;
+  width: 60px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.pagination-button:hover {
+  background-color: rgba(248, 248, 248);
+  border: solid 1px rgba(160, 160, 160);
+}
+
+.pagination-input {
+  height: 16px;
+  width: 50px;
 }
