@@ -1,7 +1,7 @@
-import React from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Chat from "../components/Chat";
 import "./HistoryPage.css";
+import Button from "../components/Button";
 
 const HistoryPage = () => {
   const questions = [
@@ -18,6 +18,11 @@ const HistoryPage = () => {
     "답변4",
     "답변5",
   ];
+
+  const exportHandle = () => {
+    console.log("test");
+  };
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -28,6 +33,7 @@ const HistoryPage = () => {
           {questions.map((v, i) => (
             <Chat key={i} question={v} answer={answers[i]} isHistory={true} />
           ))}
+          <Button name="PDF로 내보내기" type="button" onClick={exportHandle} />
         </div>
       </div>
     </HelmetProvider>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./HistoriesPage.css";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   { date: "2024.10.10", job: "fe", file: "입사지원서" },
@@ -28,6 +29,7 @@ const data = [
 
 const HistoriesPage = () => {
   const [currentPage, setCurrentPage] = useState("1");
+  const navigate = useNavigate();
 
   return (
     <HelmetProvider>
@@ -47,6 +49,7 @@ const HistoriesPage = () => {
               className="list-body"
               onClick={() => {
                 // todo 상세 페이지로 이동
+                navigate(`/histories/history/${i + 1}`);
               }}
             >
               <div className="t1">{i + 1}</div>
