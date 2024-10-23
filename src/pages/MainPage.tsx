@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,6 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Modal from "../components/Modal";
-import InputField from "../components/InputField";
 import InputFile from "../components/InputFile";
 import Button from "../components/Button";
 
@@ -28,11 +27,9 @@ const MainPage = () => {
   const openModal = () => setModalOpen(true);
   const closeModal = () => {
     setModalOpen(false);
-    setJob("");
     setSelectedFile(null);
   };
 
-  const [job, setJob] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const handleFileSelect = (file: File | null) => {
     setSelectedFile(file);
@@ -45,13 +42,10 @@ const MainPage = () => {
 
   const { refetch } = useFileUpload(selectedFile as File);
 
-  const jobRef = useRef<HTMLInputElement>(null);
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
-    if (job === "") {
-      if (jobRef.current) jobRef.current.focus();
-    } else if (!selectedFile) {
-      // 입력된 파일 없을 때
+    if (!selectedFile) {
+      alert("입사지원서 및 이력서를 업로드 해주세요.");
     } else {
       // ai 페이지로 가는 로직
       refetch();
@@ -103,13 +97,6 @@ const MainPage = () => {
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <form onSubmit={handleCreate}>
-          <InputField
-            label="직종 입력"
-            type="text"
-            value={job}
-            onChange={(e) => setJob(e.target.value)}
-            inputRef={jobRef}
-          />
           <InputFile onFileSelect={handleFileSelect} />
           <Button name="질문 생성" type="submit" />
         </form>

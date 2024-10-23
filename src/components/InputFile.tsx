@@ -23,11 +23,21 @@ const InputFile: React.FC<InputFileProps> = ({ onFileSelect }) => {
   const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
+
     if (file) {
-      setFileName(file.name); // 드롭된 파일의 이름 설정
-      onFileSelect(file);
-      if (inputRef.current) {
-        inputRef.current.files = event.dataTransfer.files;
+      const validExtensions = ["pdf", "docx", "hwp"]; // 허용된 확장자 목록
+      const fileExtension = file.name.split(".").pop()?.toLowerCase(); // 확장자 추출
+
+      if (fileExtension && validExtensions.includes(fileExtension)) {
+        setFileName(file.name); // 드롭된 파일의 이름 설정
+        onFileSelect(file);
+        if (inputRef.current) {
+          inputRef.current.files = event.dataTransfer.files;
+        }
+      } else {
+        alert(
+          "허용되지 않은 파일 형식입니다. .pdf, .docx, .hwp만 업로드할 수 있습니다."
+        );
       }
     }
   };
@@ -44,13 +54,14 @@ const InputFile: React.FC<InputFileProps> = ({ onFileSelect }) => {
         id="file-input"
         className="file-input"
         onChange={handleFileChange}
+        accept=".pdf,.docx,.hwp"
       />
       <label
         htmlFor="file-input"
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
-        {fileName ? fileName : "파일 가져오기"}
+        {fileName ? fileName : "입사지원서 및 이력서 (pdf, docx, hwp)"}
       </label>
     </div>
   );
