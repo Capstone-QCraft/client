@@ -33,6 +33,7 @@ const Chat: React.FC<ChatProps> = ({
       {!isHistory && (
         <div className="chat-inner chat-a">
           <textarea
+            name="answer"
             className="chat-textarea"
             placeholder="이곳에 채팅 또는 음성으로 답변 입력"
             value={answer}

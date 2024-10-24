@@ -240,7 +240,7 @@ const LoginPage = () => {
           <h1>로그인</h1>
           <form onSubmit={handleLoginSubmit}>
             <InputField
-              name="email"
+              id="loginEmail"
               label="이메일"
               type="email"
               value={loginEmail}
@@ -250,7 +250,7 @@ const LoginPage = () => {
               inputRef={loginEmailRef}
             />
             <InputField
-              name="password"
+              id="loginPassword"
               label="비밀번호"
               type="password"
               value={loginPassword}
@@ -285,6 +285,7 @@ const LoginPage = () => {
           <h1>회원가입</h1>
           <form onSubmit={handleSignupSubmit}>
             <InputField
+              id="signupName"
               label="이름"
               type="text"
               value={signupName}
@@ -295,6 +296,7 @@ const LoginPage = () => {
             />
             <div className="input-with-button">
               <InputField
+                id="signupEmail"
                 label="이메일"
                 type="email"
                 value={signupEmail}
@@ -317,6 +319,7 @@ const LoginPage = () => {
             </div>
             <div className="input-with-button">
               <InputField
+                id="signupCode"
                 label="인증번호"
                 type="number"
                 value={signupNumber}
@@ -334,6 +337,7 @@ const LoginPage = () => {
               </button>
             </div>
             <InputField
+              id="signupPassword"
               label="비밀번호"
               type="password"
               value={signupPassword}
@@ -345,6 +349,7 @@ const LoginPage = () => {
             <PasswordCondition password={signupPassword} />
 
             <InputField
+              id="signupPasswordCheck"
               label="비밀번호 확인"
               type="password"
               value={signupPasswordCheck}

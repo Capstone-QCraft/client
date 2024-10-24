@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./InputField.css";
 
 interface InputFieldProps {
-  name?: string;
+  id?: string;
   label: string;
   type: string;
   value: string;
@@ -11,7 +11,7 @@ interface InputFieldProps {
 }
 
 const InputField: React.FC<InputFieldProps> = ({
-  name,
+  id,
   label,
   type,
   value,
@@ -29,7 +29,7 @@ const InputField: React.FC<InputFieldProps> = ({
     <div className={`input-container ${focused || value ? "focused" : ""}`}>
       <div className="input-wrapper">
         <input
-          name={name}
+          id={id}
           type={inputType}
           value={value}
           onFocus={() => setFocused(true)}
@@ -48,7 +48,9 @@ const InputField: React.FC<InputFieldProps> = ({
           </button>
         )}
       </div>
-      <label className="floating-label">{label}</label>
+      <label htmlFor={id} className="floating-label">
+        {label}
+      </label>
     </div>
   );
 };
