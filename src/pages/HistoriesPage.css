@@ -31,7 +31,7 @@
 }
 
 .list-body:hover {
-  background-color: #dff2eb;
+  background-color: var(--list-body);
 }
 
 .t1,
@@ -70,11 +70,14 @@
 }
 
 .pagination-button:hover {
-  background-color: rgba(248, 248, 248);
-  border: solid 1px rgba(160, 160, 160);
+  background-color: var(--pagination-button-hover-bg);
+  border: solid 1px var(--pagination-button-hover-border);
 }
 
 .pagination-input {
+  color: var(--color);
+  background-color: var(--pagination-input-bg);
   height: 16px;
   width: 50px;
+  border-radius: 5px;
 }
