@@ -143,6 +143,21 @@ code {
   }
 }
 
+/* 화면에 서서히 보이게 */
+@keyframes showItem {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.show-item {
+  animation: showItem 1s ease-in-out;
+}
+
 /* input type number의 스피너 없애기 */
 /* 크롬, 사파리, 엣지, 오페라 */
 input[type="number"]::-webkit-outer-spin-button,

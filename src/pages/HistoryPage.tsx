@@ -34,6 +34,7 @@ const HistoryPage = () => {
       // 3. PDF 생성 및 이미지 추가
       const pdf = new jsPDF("portrait", "px", "a4"); // A4 사이즈 PDF
       const pdfWidth = pdf.internal.pageSize.getWidth();
+      // const pdfHeight = pdf.internal.pageSize.getHeight();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
