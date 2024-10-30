@@ -32,12 +32,11 @@ const Chat: React.FC<ChatProps> = ({
       <div className="chat-inner chat-q">
         <p className="chat-content">{question}</p>
       </div>
-      {isHistory && (
+      {isHistory ? (
         <div className="chat-inner chat-a">
           <p className="chat-content">{answer}</p>
         </div>
-      )}
-      {!isHistory && (
+      ) : (
         <div className="chat-inner chat-a">
           <textarea
             name="answer"
