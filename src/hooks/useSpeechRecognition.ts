@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const SpeechRecognition =
   (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -6,47 +6,50 @@ const SpeechRecognition =
 const useSpeechRecognition = (lang = "ko-KR") => {
   const [text, setText] = useState<string>("");
   const [isListening, setIsListening] = useState<boolean>(false);
-
-  let recognition: any;
-
-  if (SpeechRecognition) {
-    recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = lang;
-  }
+  const recognitionRef = useRef<any>(null); // recognition 인스턴스를 유지
 
   useEffect(() => {
-    if (recognition) {
-      recognition.onresult = (event: any) => {
+    if (!SpeechRecognition) {
+      console.error("Browser does not support SpeechRecognition.");
+      return;
+    }
+
+    // recognition 인스턴스를 한 번만 생성
+    if (!recognitionRef.current) {
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = lang;
+
+      recognitionRef.current.onresult = (event: any) => {
         const transcript = Array.from(event.results)
           .map((result: any) => result[0].transcript)
           .join("");
         setText(transcript);
       };
 
-      recognition.onend = () => {
+      recognitionRef.current.onend = () => {
         setIsListening(false);
       };
     }
 
     return () => {
-      if (recognition) {
-        recognition.stop();
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
       }
     };
-  }, [recognition]);
+  }, [lang]);
 
   const startListening = () => {
-    if (recognition) {
-      recognition.start();
+    if (recognitionRef.current) {
+      recognitionRef.current.start();
       setIsListening(true);
     }
   };
 
   const stopListening = () => {
-    if (recognition) {
-      recognition.stop();
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
       setIsListening(false);
     }
   };

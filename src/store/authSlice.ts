@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import Cookies from 'js-cookie';
 
 const initialState = {
-    isLoggedIn: localStorage.getItem("isLoggedIn") === "true" || false,
-    // isLoggedIn: true,
+    // isLoggedIn: localStorage.getItem("isLoggedIn") === "true" || false,
+    isLoggedIn: true,
 };
 
 const authSlice = createSlice({

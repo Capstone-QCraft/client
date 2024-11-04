@@ -62,6 +62,12 @@ code {
   --oauth-button-kakao-border: #fee500;
   --oauth-button-google-border: rgb(105, 108, 106);
   --oauth-button-naver-border: #03c75a;
+
+  --pagination-input-bg: white;
+  --pagination-button-hover-bg: rgba(248, 248, 248);
+  --pagination-button-hover-border: rgba(248, 248, 248);
+
+  --list-body: #dff2eb;
 }
 
 /* color dark */
@@ -106,6 +112,11 @@ code {
     --oauth-button-kakao-border: #fee500;
     --oauth-button-google-border: rgb(131, 134, 132);
     --oauth-button-naver-border: rgb(79, 79, 79);
+
+    --pagination-input-bg: rgb(60, 60, 60);
+    --pagination-button-hover-bg: rgba(40, 40, 40);
+
+    --list-body: rgb(40, 40, 40);
   }
   body {
     color: white;
@@ -130,6 +141,21 @@ code {
     --information-inner: block;
     --info-container-width: 95%;
   }
+}
+
+/* 화면에 서서히 보이게 */
+@keyframes showItem {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.show-item {
+  animation: showItem 1s ease-in-out;
 }
 
 /* input type number의 스피너 없애기 */

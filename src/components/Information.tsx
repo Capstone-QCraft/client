@@ -123,6 +123,7 @@ const Information: React.FC<InformationProps> = ({ h2, contents }) => {
               className="password-change-container"
             >
               <InputField
+                id="oldPassword"
                 label="기존 비밀번호"
                 type="password"
                 value={oldPassword}
@@ -132,6 +133,7 @@ const Information: React.FC<InformationProps> = ({ h2, contents }) => {
                 inputRef={oldPasswordRef}
               />
               <InputField
+                id="newPassword"
                 label="새 비밀번호"
                 type="password"
                 value={newPassword}
@@ -142,6 +144,7 @@ const Information: React.FC<InformationProps> = ({ h2, contents }) => {
               />
               <PasswordCondition password={newPassword} />
               <InputField
+                id="newPasswordCheck"
                 label="비밀번호 확인"
                 type="password"
                 value={passwordCheck}
