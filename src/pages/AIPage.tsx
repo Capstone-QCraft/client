@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Chat from "../components/Chat";
 import "./AIPage.css";
+import useFeedback from "../hooks/useFeedback";
+import useInterviewGenerate from "../hooks/useInterviewGenerate";
+import Button from "../components/Button";
 
 const AIPage = () => {
+  // const { data: generateData, refetch: generateRefetch } = useInterviewGenerate(
+  //   sessionStorage.getItem("fileId")
+  // );
+  // const { data: feedbackData, refetch: feedbackRefetch } = useFeedback(
+  //   sessionStorage.getItem("interviewId")
+  // );
+  // useEffect(() => {
+  //   generateRefetch();
+  //   console.log(generateData);
+  // }, []);
+
   const questions = [
     "React에서 상태 관리 도구로 Redux를 사용하는 이유는 무엇인가요?",
     "CSR과 SSR의 차이점은 무엇인가요?",
@@ -18,6 +32,8 @@ const AIPage = () => {
     newValues[index] = value;
     setAnswers(newValues);
   };
+
+  const handleFeedback = () => {};
 
   return (
     <HelmetProvider>
@@ -36,6 +52,11 @@ const AIPage = () => {
             </section>
           ))}
         </div>
+      </div>
+      <div className="ai-submit-container">
+        <button className="ai-submit-button" onClick={handleFeedback}>
+          면접 종료{/* todo 시간 뛰워주고 hover시 면접 종료 뜨게 */}
+        </button>
       </div>
     </HelmetProvider>
   );

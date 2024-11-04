@@ -19,3 +19,17 @@
 .ai-inner {
   width: var(--card-width);
 }
+
+.ai-submit-container {
+  position: fixed; /* 요소를 화면에 고정 */
+  right: 20px;
+  bottom: 20px;
+}
+
+.ai-submit-button {
+  height: 80px;
+  width: 80px;
+  border-radius: 50px;
+  background-color: var(--discription-button-bg-color);
+  color: var(--color);
+}
