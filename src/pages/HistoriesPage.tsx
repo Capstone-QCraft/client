@@ -4,27 +4,27 @@ import "./HistoriesPage.css";
 import { useNavigate } from "react-router-dom";
 
 const data = [
-  { date: "2024.10.10", job: "fe", file: "입사지원서" },
-  { date: "2024.10.09", job: "fe", file: "입사지원서" },
-  { date: "2024.10.08", job: "fe", file: "자기소개서" },
-  { date: "2024.10.07", job: "fe", file: "입사지원서" },
-  { date: "2024.10.06", job: "fe", file: "자기소개서" },
-  { date: "2024.10.05", job: "fe", file: "입사지원서" },
-  { date: "2024.10.04", job: "fe", file: "자기소개서" },
-  { date: "2024.10.03", job: "fe", file: "입사지원서" },
-  { date: "2024.10.02", job: "fe", file: "자기소개서" },
-  { date: "2024.10.01", job: "fe", file: "자기소개서" },
+  { date: "2024.11.04", file: "이력서 및 자기소개서" },
+  { date: "2024.10.09", file: "입사지원서" },
+  { date: "2024.10.08", file: "자기소개서" },
+  { date: "2024.10.07", file: "입사지원서" },
+  { date: "2024.10.06", file: "자기소개서" },
+  { date: "2024.10.05", file: "입사지원서" },
+  { date: "2024.10.04", file: "자기소개서" },
+  { date: "2024.10.03", file: "입사지원서" },
+  { date: "2024.10.02", file: "자기소개서" },
+  { date: "2024.10.01", file: "자기소개서" },
 
-  { date: "2024.01.10", job: "be", file: "입사지원서" },
-  // { date: "2024.01.09", job: "be", file: "입사지원서" },
-  // { date: "2024.01.08", job: "be", file: "자기소개서" },
-  // { date: "2024.01.07", job: "be", file: "입사지원서" },
-  // { date: "2024.01.06", job: "be", file: "자기소개서" },
-  // { date: "2024.01.05", job: "be", file: "자기소개서" },
-  // { date: "2024.01.04", job: "be", file: "입사지원서" },
-  // { date: "2024.01.03", job: "be", file: "입사지원서" },
-  // { date: "2024.01.02", job: "be", file: "자기소개서" },
-  // { date: "2024.01.01", job: "be", file: "입사지원서" },
+  // { date: "2024.01.10", file: "입사지원서" },
+  // { date: "2024.01.09", file: "입사지원서" },
+  // { date: "2024.01.08", file: "자기소개서" },
+  // { date: "2024.01.07", file: "입사지원서" },
+  // { date: "2024.01.06", file: "자기소개서" },
+  // { date: "2024.01.05", file: "자기소개서" },
+  // { date: "2024.01.04", file: "입사지원서" },
+  // { date: "2024.01.03", file: "입사지원서" },
+  // { date: "2024.01.02", file: "자기소개서" },
+  // { date: "2024.01.01", file: "입사지원서" },
 ];
 
 const HistoriesPage = () => {
@@ -73,7 +73,8 @@ const HistoriesPage = () => {
                 }
               }}
             />
-            <div>&nbsp; / {Math.ceil(data.length / 10)}</div>
+            {/* <div>&nbsp; / {Math.ceil(data.length / 10)}</div> */}
+            <div>&nbsp; / 2</div> {/* todo 보여주기 변경 */}
             <div className="pagination-button">{"다음 >"}</div>
           </div>
         </div>

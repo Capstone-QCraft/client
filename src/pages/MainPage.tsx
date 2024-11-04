@@ -11,6 +11,7 @@ import Button from "../components/Button";
 
 import useFileUpload from "../hooks/useFileUpload";
 import useInterviewGenerate from "../hooks/useInterviewGenerate";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -42,7 +43,9 @@ const MainPage = () => {
   };
   const fileId = useRef<string>("");
 
-  const { refetch: uploadRefetch } = useFileUpload(selectedFile as File);
+  const { isLoading, refetch: uploadRefetch } = useFileUpload(
+    selectedFile as File
+  );
   const { refetch: generateRefetch } = useInterviewGenerate(
     sessionStorage.getItem(fileId.current)
   );
@@ -61,7 +64,10 @@ const MainPage = () => {
       navigate("/ai");
     }
   };
-
+  if (isLoading) {
+    // 데이터 로딩 중일 때 로딩 스피너 표시
+    return <LoadingSpinner message="질문 생성 중..." />;
+  }
   return (
     <HelmetProvider>
       <Helmet>
