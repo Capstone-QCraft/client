@@ -9,9 +9,9 @@ import Modal from "../components/Modal";
 import InputFile from "../components/InputFile";
 import Button from "../components/Button";
 
-import useFileUpload from "../hooks/useFileUpload";
-import useInterviewGenerate from "../hooks/useInterviewGenerate";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { fileApi, interviewApi } from "../api";
+import AIPage from "./AIPage";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -41,33 +41,26 @@ const MainPage = () => {
       openModal();
     } else navigate("/login");
   };
-  const fileId = useRef<string>("");
 
-  const { isLoading, refetch: uploadRefetch } = useFileUpload(
-    selectedFile as File
-  );
-  const { refetch: generateRefetch } = useInterviewGenerate(
-    sessionStorage.getItem(fileId.current)
-  );
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedFile) {
       alert("입사지원서 및 이력서를 업로드 해주세요.");
     } else {
-      // ai 페이지로 가는 로직
-      const { data: uploadData } = await uploadRefetch();
-      console.log("uploadData", uploadData);
-      fileId.current = await uploadData.fileId;
-      const { data: generateData } = await generateRefetch();
-      console.log("generateData", generateData);
-      navigate("/ai");
+      try {
+        setIsLoading(true);
+        const res = await fileApi.fileUpload(selectedFile);
+        navigate(`/ai/${res.data.fileId}`);
+      } catch (error) {
+        alert("문제가 발생했습니다. 다시 시도해주세요.");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
-  if (isLoading) {
-    // 데이터 로딩 중일 때 로딩 스피너 표시
-    return <LoadingSpinner message="질문 생성 중..." />;
-  }
+
+  if (isLoading) return <LoadingSpinner message="파일 업로드 중..." />;
   return (
     <HelmetProvider>
       <Helmet>

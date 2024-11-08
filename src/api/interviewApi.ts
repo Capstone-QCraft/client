@@ -5,7 +5,6 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 // 질문 생성
 const generate = async (fileId: string) => {
-    console.log("fileId", fileId)
     const token = await Cookies.get('access_token');
     return axios.post(`${SERVER_URL}/interview/generate`,
         null,
