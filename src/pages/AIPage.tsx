@@ -10,9 +10,11 @@ const AIPage = () => {
   const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
+  const [interviewId, setInterviewId] = useState("");
   const [questions, setQuestions] = useState<string[]>(["", "", ""]);
-
+  const [answers, setAnswers] = useState<string[]>(["", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fetchQuestions = async () => {
       if (!id) {
@@ -21,6 +23,7 @@ const AIPage = () => {
         try {
           setIsLoading(true);
           const res = await interviewApi.generate(id);
+          setInterviewId(res.data.interviewId);
           setQuestions(res.data.questions);
         } catch (error) {
           alert("문제가 발생했습니다. 다시 시도해주세요.");
@@ -34,16 +37,16 @@ const AIPage = () => {
     fetchQuestions();
   }, [id, navigate]);
 
-  const [answers, setAnswers] = useState<string[]>(["", "", ""]);
-
   const handleChange = (index: number, value: string) => {
     const newValues = [...answers];
     newValues[index] = value;
     setAnswers(newValues);
   };
 
-  const handleFeedback = () => {
-    navigate("/histories/history/1");
+  const handleFeedback = async () => {
+    const res = await interviewApi.feedback(interviewId, answers);
+    console.log(res);
+    // navigate("/histories/history/1");
   };
 
   if (isLoading) return <LoadingSpinner message="질문 생성 중..." />;

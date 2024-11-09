@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./HistoriesPage.css";
 import { useNavigate } from "react-router-dom";
+import { interviewApi } from "../api";
 
 const data = [
   { date: "2024.11.04", file: "이력서 및 자기소개서" },
@@ -30,6 +31,17 @@ const data = [
 const HistoriesPage = () => {
   const [currentPage, setCurrentPage] = useState("1");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await interviewApi.list();
+      console.log(res);
+    };
+    fetchData();
+  });
+
+  // const [questions, setQuestions] = useState([]);
+  // const [answers, setAnswers] = useState([]);
 
   return (
     <HelmetProvider>

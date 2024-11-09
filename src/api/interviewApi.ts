@@ -17,10 +17,10 @@ const generate = async (fileId: string) => {
 };
 
 // 피드백 받기
-const feedback = async (interviewId: string) => {
+const feedback = async (interviewId: string, answers: string[]) => {
     const token = await Cookies.get('access_token');
     return axios.post(`${SERVER_URL}/interview/feedback`,
-        { interviewId },
+        { interviewId, answers },
         {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -29,10 +29,9 @@ const feedback = async (interviewId: string) => {
 };
 
 // 리스트
-const list = async (interviewId: string) => {
+const list = async () => {
     const token = await Cookies.get('access_token');
-    return axios.post(`${SERVER_URL}/interview/list`,
-        { interviewId },
+    return axios.get(`${SERVER_URL}/interview/list`,
         {
             headers: {
                 Authorization: `Bearer ${token}`,
