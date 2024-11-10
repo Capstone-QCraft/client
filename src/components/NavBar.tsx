@@ -14,7 +14,7 @@ enum DEVICE_TYPE {
 
 const NavItems = [
   ["소개", "/"],
-  ["AI질문", "/ai"],
+  // ["AI질문", "/ai"],
   ["기록", "/histories"],
   ["내정보", "/user"],
 ];

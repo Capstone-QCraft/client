@@ -1,17 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Chat from "../components/Chat";
 import "./AIPage.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { interviewApi } from "../api";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AIPage = () => {
-  const questions = [
-    "React에서 상태 관리 도구로 Redux를 사용하는 이유는 무엇인가요?",
-    "CSR과 SSR의 차이점은 무엇인가요?",
-    "React에서 Virtual DOM이란 무엇인가요? 그리고 왜 사용하는지 설명해 주세요.",
-    "웹 성능 최적화를 위해 어떤 방법을 사용하나요?",
-    "CORS 문제를 해결하는 방법은 무엇인가요?",
-  ];
-  const [answers, setAnswers] = useState<string[]>(["", "", "", "", ""]);
+  const navigate = useNavigate();
+
+  const { id } = useParams<{ id: string }>();
+  const [interviewId, setInterviewId] = useState("");
+  const [questions, setQuestions] = useState<string[]>(["", "", ""]);
+  const [answers, setAnswers] = useState<string[]>(["", "", ""]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      if (!id) {
+        navigate("/");
+      } else {
+        try {
+          setIsLoading(true);
+          const res = await interviewApi.generate(id);
+          setInterviewId(res.data.interviewId);
+          setQuestions(res.data.questions);
+        } catch (error) {
+          alert("문제가 발생했습니다. 다시 시도해주세요.");
+          navigate("/");
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchQuestions();
+  }, [id, navigate]);
 
   const handleChange = (index: number, value: string) => {
     const newValues = [...answers];
@@ -19,10 +43,18 @@ const AIPage = () => {
     setAnswers(newValues);
   };
 
+  const handleFeedback = async () => {
+    // 로딩
+    const res = await interviewApi.feedback(interviewId, answers);
+    console.log(res);
+    // navigate("/histories/history/1");
+  };
+
+  if (isLoading) return <LoadingSpinner message="질문 생성 중..." />;
   return (
     <HelmetProvider>
       <Helmet>
-        <title>AI질문</title>
+        <title>AI 인터뷰</title>
       </Helmet>
       <div className="ai-container">
         <div className="ai-inner">
@@ -36,6 +68,12 @@ const AIPage = () => {
             </section>
           ))}
         </div>
+      </div>
+      <div className="ai-submit-container">
+        <button className="ai-submit-button" onClick={handleFeedback}>
+          면접 종료{/* todo 시간 뛰워주고 hover시 면접 종료 뜨게 */}
+        </button>
+        <div className="ai-submit-button-border"></div>
       </div>
     </HelmetProvider>
   );

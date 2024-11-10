@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,9 @@ import Modal from "../components/Modal";
 import InputFile from "../components/InputFile";
 import Button from "../components/Button";
 
-import useFileUpload from "../hooks/useFileUpload";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { fileApi, interviewApi } from "../api";
+import AIPage from "./AIPage";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -40,19 +42,25 @@ const MainPage = () => {
     } else navigate("/login");
   };
 
-  const { refetch } = useFileUpload(selectedFile as File);
-
-  const handleCreate = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedFile) {
       alert("입사지원서 및 이력서를 업로드 해주세요.");
     } else {
-      // ai 페이지로 가는 로직
-      refetch();
-      navigate("/ai");
+      try {
+        setIsLoading(true);
+        const res = await fileApi.fileUpload(selectedFile);
+        navigate(`/ai/${res.data.fileId}`);
+      } catch (error) {
+        alert("문제가 발생했습니다. 다시 시도해주세요.");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
+  if (isLoading) return <LoadingSpinner message="파일 업로드 중..." />;
   return (
     <HelmetProvider>
       <Helmet>
@@ -89,7 +97,7 @@ const MainPage = () => {
       />
 
       <Discription
-        h1="서비스 이용 방법 이미지"
+        h1="서비스 설명"
         ps={[
           "입사 지원서 업로드 -> AI 면접 예상 질문 생성 -> 답변 제출 -> AI피드백",
         ]}

@@ -8,6 +8,7 @@ import useIntersectionObsever from "../hooks/useIntersectionObsever";
 interface ChatProps {
   question: string;
   answer: string;
+  peedback?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   isHistory?: boolean;
 }
@@ -16,6 +17,7 @@ const Chat: React.FC<ChatProps> = ({
   question,
   answer,
   onChange,
+  peedback,
   isHistory,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -33,9 +35,14 @@ const Chat: React.FC<ChatProps> = ({
         <p className="chat-content">{question}</p>
       </div>
       {isHistory ? (
-        <div className="chat-inner chat-a">
-          <p className="chat-content">{answer}</p>
-        </div>
+        <>
+          <div className="chat-inner chat-a">
+            <p className="chat-content">{answer}</p>
+          </div>
+          <div style={{ whiteSpace: "pre-line" }} className="chat-comment">
+            {peedback}
+          </div>
+        </>
       ) : (
         <div className="chat-inner chat-a">
           <textarea

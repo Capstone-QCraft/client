@@ -8,6 +8,7 @@
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
+
   width: fit-content;
   max-width: 80%;
   position: relative;
@@ -63,4 +64,9 @@
 .chat-mic-img {
   width: 30px;
   height: 30px;
+}
+
+.chat-comment {
+  margin-bottom: 50px;
+  margin-top: 10px;
 }
