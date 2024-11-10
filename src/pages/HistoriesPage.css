@@ -38,6 +38,7 @@
 .t2,
 .t3 {
   text-align: center;
+  white-space: nowrap;
   overflow: hidden;
   margin: 5px;
 }
@@ -53,8 +54,11 @@
 
 .pagination-container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  overflow-x: auto;
+  box-sizing: border-box;
+  flex-wrap: nowrap; /* 버튼들이 한 줄에 유지되도록 설정 */
+  padding: 10px; /* 스크롤바와 버튼 사이에 여백 추가 */
 }
 
 .pagination-button {
@@ -64,20 +68,16 @@
   margin: 5px;
   box-sizing: border-box;
   height: 30px;
-  width: 60px;
+  width: 50px;
   border-radius: 10px;
   cursor: pointer;
+  flex-shrink: 0; /* 버튼 크기 축소 방지 */
+  background-color: var(--pagination-button-bg);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .pagination-button:hover {
-  background-color: var(--pagination-button-hover-bg);
+  background-color: var(--pagination-button-bg-hover);
   border: solid 1px var(--pagination-button-hover-border);
-}
-
-.pagination-input {
-  color: var(--color);
-  background-color: var(--pagination-input-bg);
-  height: 16px;
-  width: 50px;
-  border-radius: 5px;
+  transform: scale(1.05);
 }

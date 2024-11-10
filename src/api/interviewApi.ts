@@ -29,10 +29,11 @@ const feedback = async (interviewId: string, answers: string[]) => {
 };
 
 // 리스트
-const list = async () => {
+const list = async (page: number, size: number, direction: string = "DESC") => {
     const token = await Cookies.get('access_token');
     return axios.get(`${SERVER_URL}/interview/list`,
         {
+            params: { page, size, direction },
             headers: {
                 Authorization: `Bearer ${token}`,
             },

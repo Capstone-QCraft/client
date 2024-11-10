@@ -44,6 +44,7 @@ const AIPage = () => {
   };
 
   const handleFeedback = async () => {
+    // 로딩
     const res = await interviewApi.feedback(interviewId, answers);
     console.log(res);
     // navigate("/histories/history/1");
