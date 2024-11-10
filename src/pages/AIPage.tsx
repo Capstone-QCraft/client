@@ -13,7 +13,8 @@ const AIPage = () => {
   const [interviewId, setInterviewId] = useState("");
   const [questions, setQuestions] = useState<string[]>(["", "", ""]);
   const [answers, setAnswers] = useState<string[]>(["", "", ""]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMakeQ, setIsLoadingMakeQ] = useState(false);
+  const [isLoadingPeedback, setIsLoadingPeedback] = useState(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -21,7 +22,7 @@ const AIPage = () => {
         navigate("/");
       } else {
         try {
-          setIsLoading(true);
+          setIsLoadingMakeQ(true);
           const res = await interviewApi.generate(id);
           setInterviewId(res.data.interviewId);
           setQuestions(res.data.questions);
@@ -29,7 +30,7 @@ const AIPage = () => {
           alert("문제가 발생했습니다. 다시 시도해주세요.");
           navigate("/");
         } finally {
-          setIsLoading(false);
+          setIsLoadingMakeQ(false);
         }
       }
     };
@@ -44,13 +45,15 @@ const AIPage = () => {
   };
 
   const handleFeedback = async () => {
-    // 로딩
+    setIsLoadingPeedback(true);
     const res = await interviewApi.feedback(interviewId, answers);
-    console.log(res);
-    // navigate("/histories/history/1");
+    navigate(`/histories/history/${res.data.interviewId}`);
+    // setIsLoadingPeedback(false);
   };
 
-  if (isLoading) return <LoadingSpinner message="질문 생성 중..." />;
+  if (isLoadingMakeQ) return <LoadingSpinner message="질문 생성 중..." />;
+  if (isLoadingPeedback)
+    return <LoadingSpinner message="AI 피드백 받는 중..." />;
   return (
     <HelmetProvider>
       <Helmet>
