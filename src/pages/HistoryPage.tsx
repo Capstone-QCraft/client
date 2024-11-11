@@ -14,7 +14,6 @@ const HistoryPage = () => {
   const [answers, setAnswers] = useState([]);
   const [positivePoint, setPositivePoint] = useState([]);
   const [improvement, setImprovement] = useState([]);
-  // const [peedbacks, setPeedbacks] = useState([]);
   const [totalPeedback, setTotalPeedback] = useState("");
 
   const exportRef = useRef<HTMLDivElement>(null);
@@ -77,9 +76,9 @@ const HistoryPage = () => {
                 isHistory={true}
               />
             ))}
+            <br />
+            <div style={{ whiteSpace: "pre-line" }}>{totalPeedback}</div>
           </div>
-          <br />
-          <div style={{ whiteSpace: "pre-line" }}>{totalPeedback}</div>
           <Button name="PDF로 내보내기" type="button" onClick={exportHandle} />
         </div>
       </div>
