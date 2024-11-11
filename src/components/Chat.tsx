@@ -30,7 +30,7 @@ const Chat: React.FC<ChatProps> = ({
   const isInViewport = useIntersectionObsever(ref);
 
   const { text, isListening, startListening, stopListening } =
-    useSpeechRecognition(); // todo 음성 입력 시 텍스트 입력 차단 -> [...answer, text]
+    useSpeechRecognition();
 
   return (
     <div

@@ -10,8 +10,7 @@ import InputFile from "../components/InputFile";
 import Button from "../components/Button";
 
 import LoadingSpinner from "../components/LoadingSpinner";
-import { fileApi, interviewApi } from "../api";
-import AIPage from "./AIPage";
+import { fileApi } from "../api";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -69,8 +68,8 @@ const MainPage = () => {
       <Discription
         h1="면접 준비의 첫걸음 AI와 함께, Qcraft"
         ps={[
-          "입사 지원서를 토대로 AI가 예상 질문을 뽑아줍니다.",
-          "제출한 답변을 AI를 통해 피드백을 받아보세요",
+          "지원서를 분석하여 AI가 예상 면접 질문을 제공합니다.",
+          "AI를 통해 작성하신 답변에 대한 피드백을 받아보세요.",
         ]}
         btn="지금 시작하기"
         onClick={handleStart}
@@ -89,19 +88,34 @@ const MainPage = () => {
       />
 
       <Discription
-        h1="면접 준비 막막하셨나요?"
+        h1="맞춤형 예상 질문 제공"
         ps={[
-          "입사 지원서를 토대로 AI가 예상 질문을 뽑아줍니다.",
-          "제출한 답변을 AI를 통해 피드백을 받아보세요",
+          "지원서를 분석하여 AI가 당신에게 꼭 맞는 예상 면접 질문을 제공합니다.",
+        ]}
+      />
+      <Discription
+        h1="시간 절약"
+        ps={[
+          "효과적인 준비로 소중한 시간을 절약하고, 면접에 더욱 집중할 수 있습니다.",
+        ]}
+      />
+      <Discription
+        h1="자신감 향상"
+        ps={["철저한 준비로 면접장에서 자신감 있게 임할 수 있습니다."]}
+      />
+      <Discription
+        h1="전문적인 답변 피드백"
+        ps={[
+          "작성하신 답변에 대해 AI의 객관적이고 전문적인 피드백을 받아보세요.",
         ]}
       />
 
-      <Discription
+      {/* <Discription
         h1="서비스 설명"
         ps={[
           "입사 지원서 업로드 -> AI 면접 예상 질문 생성 -> 답변 제출 -> AI피드백",
         ]}
-      />
+      /> */}
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <form onSubmit={handleCreate}>

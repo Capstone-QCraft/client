@@ -16,6 +16,34 @@ const AIPage = () => {
   const [isLoadingMakeQ, setIsLoadingMakeQ] = useState(false);
   const [isLoadingPeedback, setIsLoadingPeedback] = useState(false);
 
+  // 경과 시간을 저장하는 상태 변수와 호버 상태를 관리하는 변수 추가
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // 컴포넌트 마운트 시 타이머 시작
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setElapsedTime((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(timer); // 컴포넌트 언마운트 시 타이머 정지
+  }, []);
+
+  // 시간을 형식에 맞게 변환하는 함수
+  const formatTime = (seconds: number) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+
+    const hDisplay = h > 0 ? `${h}:` : "";
+    const mDisplay = m < 10 ? `0${m}:` : `${m}:`;
+    const sDisplay = s < 10 ? `0${s}` : `${s}`;
+
+    return hDisplay + mDisplay + sDisplay;
+  };
+
+  const formattedTime = formatTime(elapsedTime);
+
   // 음성 결과를 저장하는 함수를 생성합니다.
   const handleVoice = (index: number, value: string) => {
     const newAnswers = [...answers];
@@ -30,6 +58,7 @@ const AIPage = () => {
         try {
           setIsLoadingMakeQ(true);
           const res = await interviewApi.generate(id);
+          console.log(res);
           setInterviewId(res.data.interviewId);
           setQuestions(res.data.questions);
         } catch (error) {
@@ -41,13 +70,8 @@ const AIPage = () => {
       }
     };
 
-    // fetchQuestions();
+    fetchQuestions();
   }, [id, navigate]);
-
-  // const test1 = (value: string) => {
-  //   console.log(value);
-  //   setVoice1(value);
-  // };
 
   const handleChange = (index: number, value: string) => {
     const newValues = [...answers];
@@ -56,6 +80,7 @@ const AIPage = () => {
   };
 
   const handleFeedback = async () => {
+    // todo 음성 인식 정지 버튼 누르지 않아도 반영
     setIsLoadingPeedback(true);
     const res = await interviewApi.feedback(interviewId, answers);
     navigate(`/histories/history/${res.data.interviewId}`);
@@ -86,8 +111,13 @@ const AIPage = () => {
         </div>
       </div>
       <div className="ai-submit-container">
-        <button className="ai-submit-button" onClick={handleFeedback}>
-          면접 종료{/* todo 시간 뛰워주고 hover시 면접 종료 뜨게 */}
+        <button
+          className="ai-submit-button"
+          onClick={handleFeedback}
+          onMouseEnter={() => setIsHovered(true)} // 마우스 오버 시 호버 상태 변경
+          onMouseLeave={() => setIsHovered(false)} // 마우스 리브 시 호버 상태 변경
+        >
+          {isHovered ? "면접 종료" : formattedTime}
         </button>
         <div className="ai-submit-button-border"></div>
       </div>
