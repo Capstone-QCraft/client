@@ -12,6 +12,8 @@ interface ChatProps {
   improvement?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   isHistory?: boolean;
+
+  handleVoice?: (value: string) => void;
 }
 
 const Chat: React.FC<ChatProps> = ({
@@ -21,6 +23,8 @@ const Chat: React.FC<ChatProps> = ({
   positivePoint,
   improvement,
   isHistory,
+
+  handleVoice,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInViewport = useIntersectionObsever(ref);
@@ -57,12 +61,19 @@ const Chat: React.FC<ChatProps> = ({
             name="answer"
             className="chat-textarea"
             placeholder="이곳에 채팅 또는 음성으로 답변 입력"
-            value={answer}
-            onChange={onChange}
+            value={isListening ? answer + text : answer}
+            onChange={isListening ? undefined : onChange}
           />
           <button
             className="chat-mic-button"
-            onClick={isListening ? stopListening : startListening}
+            onClick={
+              isListening
+                ? () => {
+                    if (stopListening) stopListening();
+                    if (handleVoice) handleVoice(text);
+                  }
+                : startListening
+            }
           >
             <img
               src={isListening ? stop : mic}

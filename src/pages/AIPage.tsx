@@ -16,6 +16,12 @@ const AIPage = () => {
   const [isLoadingMakeQ, setIsLoadingMakeQ] = useState(false);
   const [isLoadingPeedback, setIsLoadingPeedback] = useState(false);
 
+  // 음성 결과를 저장하는 함수를 생성합니다.
+  const handleVoice = (index: number, value: string) => {
+    const newAnswers = [...answers];
+    newAnswers[index] = newAnswers[index] + value;
+    setAnswers(newAnswers);
+  };
   useEffect(() => {
     const fetchQuestions = async () => {
       if (!id) {
@@ -35,8 +41,13 @@ const AIPage = () => {
       }
     };
 
-    fetchQuestions();
+    // fetchQuestions();
   }, [id, navigate]);
+
+  // const test1 = (value: string) => {
+  //   console.log(value);
+  //   setVoice1(value);
+  // };
 
   const handleChange = (index: number, value: string) => {
     const newValues = [...answers];
@@ -49,6 +60,7 @@ const AIPage = () => {
     const res = await interviewApi.feedback(interviewId, answers);
     navigate(`/histories/history/${res.data.interviewId}`);
     // setIsLoadingPeedback(false);
+    // console.log(answers);
   };
 
   if (isLoadingMakeQ) return <LoadingSpinner message="질문 생성 중..." />;
@@ -67,6 +79,7 @@ const AIPage = () => {
                 question={v}
                 answer={answers[i]}
                 onChange={(e) => handleChange(i, e.target.value)}
+                handleVoice={(value) => handleVoice(i, value)}
               />
             </section>
           ))}

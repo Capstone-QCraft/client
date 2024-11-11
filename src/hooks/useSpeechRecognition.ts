@@ -41,6 +41,7 @@ const useSpeechRecognition = (lang = "ko-KR") => {
   }, [lang]);
 
   const startListening = () => {
+    setText(''); // 텍스트 초기화
     if (recognitionRef.current) {
       recognitionRef.current.start();
       setIsListening(true);
