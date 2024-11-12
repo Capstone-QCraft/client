@@ -7,14 +7,24 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { interviewApi } from "../api";
 import { useNavigate, useParams } from "react-router-dom";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const HistoryPage = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInViewport = useIntersectionObserver(ref);
+
+  useEffect(() => {
+    console.log(isInViewport);
+  }, [isInViewport]);
+
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [positivePoint, setPositivePoint] = useState([]);
   const [improvement, setImprovement] = useState([]);
   const [totalPeedback, setTotalPeedback] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const exportRef = useRef<HTMLDivElement>(null);
   const exportHandle = async () => {
@@ -45,12 +55,14 @@ const HistoryPage = () => {
       alert("문제가 발생했습니다. 다시 시도해주세요.");
       navigate("/histories");
     } else {
+      setIsLoading(true);
       const res = await interviewApi.history(id);
       setQuestions(res.data.interview.questions);
       setAnswers(res.data.interview.answers);
       setPositivePoint(res.data.interview.positivePoint);
       setImprovement(res.data.interview.improvement);
       setTotalPeedback(res.data.interview.overallSuggestion);
+      setIsLoading(false);
     }
   };
 
@@ -58,6 +70,7 @@ const HistoryPage = () => {
     fetchData();
   }, [id]);
 
+  if (isLoading) return <LoadingSpinner />;
   return (
     <HelmetProvider>
       <Helmet>
@@ -65,6 +78,7 @@ const HistoryPage = () => {
       </Helmet>
       <div className="history-container">
         <div className="history-inner">
+          <div style={{ height: "100px" }}></div>
           <div ref={exportRef}>
             {questions.map((v, i) => (
               <Chat
@@ -76,10 +90,15 @@ const HistoryPage = () => {
                 isHistory={true}
               />
             ))}
-            <br />
-            <div style={{ whiteSpace: "pre-line" }}>{totalPeedback}</div>
+            <div
+              className={`chat-inner chat-t ${isInViewport ? "show-item" : ""}`}
+              ref={ref}
+            >
+              {totalPeedback}
+            </div>
           </div>
           <Button name="PDF로 내보내기" type="button" onClick={exportHandle} />
+          <div style={{ height: "100px" }}></div>
         </div>
       </div>
     </HelmetProvider>

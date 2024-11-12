@@ -3,7 +3,7 @@ import mic from "../assets/images/microphone.png";
 import stop from "../assets/images/stop.png";
 import useSpeechRecognition from "../hooks/useSpeechRecognition";
 import { useRef } from "react";
-import useIntersectionObsever from "../hooks/useIntersectionObsever";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
 interface ChatProps {
   question: string;
@@ -27,7 +27,7 @@ const Chat: React.FC<ChatProps> = ({
   handleVoice,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInViewport = useIntersectionObsever(ref);
+  const isInViewport = useIntersectionObserver(ref);
 
   const { text, isListening, startListening, stopListening } =
     useSpeechRecognition();
@@ -45,15 +45,8 @@ const Chat: React.FC<ChatProps> = ({
           <div className="chat-inner chat-a">
             <p className="chat-content">{answer}</p>
           </div>
-
-          <span>긍정적인 측면</span>
-          <div>{positivePoint}</div>
-          <br />
-          <span>부정적인 측면</span>
-          <div>{improvement}</div>
-          {/* <div style={{ whiteSpace: "pre-line" }} className="chat-comment">
-            {peedback}
-          </div> */}
+          <div className="chat-inner chat-q">👍🏻 {positivePoint}</div>
+          <div className="chat-inner chat-q">👎🏻 {improvement}</div>
         </>
       ) : (
         <div className="chat-inner chat-a">

@@ -26,6 +26,23 @@
   color: black;
 }
 
+.chat-p {
+  background-color: var(--chat-p-bg);
+  align-self: flex-start;
+}
+
+.chat-n {
+  background-color: var(--chat-n-bg);
+  align-self: flex-start;
+  margin-bottom: 100px;
+}
+
+.chat-t {
+  background-color: var(--chat-t-bg);
+  align-self: flex-start;
+  white-space: pre-line;
+}
+
 .chat-content {
   margin: 0;
   padding: 0;

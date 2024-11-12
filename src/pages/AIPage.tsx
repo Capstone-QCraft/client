@@ -58,7 +58,6 @@ const AIPage = () => {
         try {
           setIsLoadingMakeQ(true);
           const res = await interviewApi.generate(id);
-          console.log(res);
           setInterviewId(res.data.interviewId);
           setQuestions(res.data.questions);
         } catch (error) {

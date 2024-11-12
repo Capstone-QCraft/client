@@ -50,6 +50,9 @@ code {
 
   --chat-q-bg: rgb(190, 205, 222);
   --chat-a-bg: rgb(251, 229, 77);
+  --chat-p-bg: #b9e5e8;
+  --chat-n-bg: #de7c7ea1;
+  --chat-t-bg: #c0eba6;
 
   --oauth-button-kakao: #fee500;
   --oauth-button-google: rgba(247, 247, 247);
@@ -103,6 +106,9 @@ code {
 
     --chat-q-bg: rgb(49, 49, 49);
     --chat-a-bg: rgb(251, 229, 77);
+    --chat-p-bg: #296368;
+    --chat-n-bg: #9a3f40a1;
+    --chat-t-bg: #395a24;
 
     --oauth-button-kakao: #fee500;
     --oauth-button-google: rgba(20, 20, 20);

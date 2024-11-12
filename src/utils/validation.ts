@@ -2,7 +2,7 @@ enum INPUT_LENGTH {
     NAME = 20,
     EMAIL = 40,
     PASSWORD = 20,
-    NUMBER = 4,
+    NUMBER = 6,
 }
 
 const isValidEmail = (email: string) => {

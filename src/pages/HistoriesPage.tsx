@@ -26,7 +26,6 @@ const HistoriesPage = () => {
     const res = await interviewApi.list(currentPage - 1, getListNum);
     setPageCnt(Math.ceil(res.data.totalInterviews / getListNum));
     setList(res.data.data);
-    console.log(res);
     setIsLoading(false);
   };
 

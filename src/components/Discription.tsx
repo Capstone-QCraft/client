@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import "./Discription.css";
-import useIntersectionObsever from "../hooks/useIntersectionObsever";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
 interface DiscriptionProps {
   h1: string;
@@ -11,7 +11,7 @@ interface DiscriptionProps {
 
 const Discription: React.FC<DiscriptionProps> = ({ h1, ps, btn, onClick }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInViewport = useIntersectionObsever(ref);
+  const isInViewport = useIntersectionObserver(ref);
 
   return (
     <div

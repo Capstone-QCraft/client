@@ -3,7 +3,7 @@ import type { RefObject } from 'react'
 
 // 특정 DOM 요소가 뷰포트(viewport) 안에 있는지를 감지하는 훅
 
-const useIntersectionObsever = (targetRef: RefObject<HTMLDivElement>) => {
+const useIntersectionObserver = (targetRef: RefObject<HTMLDivElement>) => {
     const [isInViewport, setIsInViewport] = useState(false)
     const observer = useRef<IntersectionObserver>()
 
@@ -36,4 +36,4 @@ const useIntersectionObsever = (targetRef: RefObject<HTMLDivElement>) => {
     return isInViewport
 }
 
-export default useIntersectionObsever
+export default useIntersectionObserver
