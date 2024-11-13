@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Chat from "../components/Chat";
 import "./AIPage.css";
@@ -20,14 +20,8 @@ const AIPage = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  // 컴포넌트 마운트 시 타이머 시작
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setElapsedTime((prev) => prev + 1);
-    }, 1000);
-
-    return () => clearInterval(timer); // 컴포넌트 언마운트 시 타이머 정지
-  }, []);
+  // 타이머 ID를 저장하기 위한 useRef 추가
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // 시간을 형식에 맞게 변환하는 함수
   const formatTime = (seconds: number) => {
@@ -50,6 +44,7 @@ const AIPage = () => {
     newAnswers[index] = newAnswers[index] + value;
     setAnswers(newAnswers);
   };
+
   useEffect(() => {
     const fetchQuestions = async () => {
       if (!id) {
@@ -60,6 +55,13 @@ const AIPage = () => {
           const res = await interviewApi.generate(id);
           setInterviewId(res.data.interviewId);
           setQuestions(res.data.questions);
+
+          // 질문 생성 후 타이머 시작
+          if (!timerRef.current) {
+            timerRef.current = setInterval(() => {
+              setElapsedTime((prev) => prev + 1);
+            }, 1000);
+          }
         } catch (error) {
           alert("문제가 발생했습니다. 다시 시도해주세요.");
           navigate("/");
@@ -70,6 +72,14 @@ const AIPage = () => {
     };
 
     fetchQuestions();
+
+    // 클린업 함수: 컴포넌트 언마운트 시 타이머 정지
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
   }, [id, navigate]);
 
   const handleChange = (index: number, value: string) => {
