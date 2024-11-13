@@ -13,10 +13,6 @@ const HistoryPage = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInViewport = useIntersectionObserver(ref);
 
-  useEffect(() => {
-    console.log(isInViewport);
-  }, [isInViewport]);
-
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);

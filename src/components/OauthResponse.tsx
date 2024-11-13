@@ -1,4 +1,3 @@
-// src/pages/OauthResponse.tsx
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,9 +9,13 @@ const OauthResponse: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = window.location.pathname.split("/").pop();
-    if (token) {
-      saveToken(token);
+    const path = window.location.pathname.split("/");
+    const refreshToken = path.pop();
+    const accessToken = path.pop();
+
+    console.log(accessToken);
+    if (accessToken) {
+      saveToken(accessToken);
       dispatch(login());
       navigate("/");
     } else {

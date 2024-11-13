@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./OauthButton.css";
-import { useNavigate } from "react-router-dom";
 
 import google_logo from "../assets/images/google.svg";
 import kakao_logo from "../assets/images/kakao.svg";
@@ -15,7 +14,6 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const OauthButton: React.FC<OauthButtonProps> = ({ type }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
