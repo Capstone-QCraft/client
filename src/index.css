@@ -50,9 +50,6 @@ code {
 
   --chat-q-bg: rgb(190, 205, 222);
   --chat-a-bg: rgb(251, 229, 77);
-  --chat-p-bg: #b9e5e8;
-  --chat-n-bg: #de7c7ea1;
-  --chat-t-bg: #c0eba6;
 
   --oauth-button-kakao: #fee500;
   --oauth-button-google: rgba(247, 247, 247);
@@ -166,6 +163,15 @@ code {
 }
 .show-item {
   animation: showItem 1s ease-in-out;
+}
+
+/* 애니메이션을 비활성화하는 클래스 */
+.no-animation *,
+.no-animation *::before,
+.no-animation *::after {
+  animation: none !important;
+  transition: none !important;
+  opacity: 1 !important;
 }
 
 /* input type number의 스피너 없애기 */

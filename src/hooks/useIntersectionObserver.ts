@@ -31,7 +31,7 @@ const useIntersectionObserver = (targetRef: RefObject<HTMLDivElement>) => {
                 observer.current.disconnect()
             }
         }
-    }, [targetRef])
+    }, [targetRef.current])
 
     return isInViewport
 }

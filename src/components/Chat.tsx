@@ -37,6 +37,7 @@ const Chat: React.FC<ChatProps> = ({
       className={`chat-container ${isInViewport ? "show-item" : ""}`}
       ref={ref}
     >
+      <div style={{ height: "100px" }}></div>
       <div className="chat-inner chat-q">
         <p className="chat-content">{question}</p>
       </div>
@@ -45,8 +46,8 @@ const Chat: React.FC<ChatProps> = ({
           <div className="chat-inner chat-a">
             <p className="chat-content">{answer}</p>
           </div>
-          <div className="chat-inner chat-q">👍🏻 {positivePoint}</div>
-          <div className="chat-inner chat-q">👎🏻 {improvement}</div>
+          <div className="chat-inner chat-p">👍🏻 {positivePoint}</div>
+          <div className="chat-inner chat-p">👎🏻 {improvement}</div>
         </>
       ) : (
         <div className="chat-inner chat-a">

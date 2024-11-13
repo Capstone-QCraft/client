@@ -27,20 +27,13 @@
 }
 
 .chat-p {
-  background-color: var(--chat-p-bg);
+  background-color: var(--chat-q-bg);
   align-self: flex-start;
-}
-
-.chat-n {
-  background-color: var(--chat-n-bg);
-  align-self: flex-start;
-  margin-bottom: 100px;
+  white-space: pre-line;
 }
 
 .chat-t {
-  background-color: var(--chat-t-bg);
-  align-self: flex-start;
-  white-space: pre-line;
+  font-weight: bold;
 }
 
 .chat-content {

@@ -3,7 +3,6 @@ import Chat from "../components/Chat";
 import "./HistoryPage.css";
 import Button from "../components/Button";
 import { useEffect, useRef, useState } from "react";
-import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { interviewApi } from "../api";
 import { useNavigate, useParams } from "react-router-dom";
@@ -29,22 +28,16 @@ const HistoryPage = () => {
   const exportRef = useRef<HTMLDivElement>(null);
   const exportHandle = async () => {
     if (exportRef.current) {
-      // 1. html2canvas로 특정 영역 캡처
+      exportRef.current.classList.add("no-animation");
       const canvas = await html2canvas(exportRef.current);
-
-      // 2. 캔버스를 이미지로 변환
+      exportRef.current.classList.remove("no-animation");
       const imgData = canvas.toDataURL("image/png");
-
-      // 3. PDF 생성 및 이미지 추가
-      const pdf = new jsPDF("portrait", "px", "a4"); // A4 사이즈 PDF
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      // const pdfHeight = pdf.internal.pageSize.getHeight();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("download.pdf"); // PDF 다운로드
-
-      // todo 글자 인식 가능한 pdf 로 저장 가능하면 진행
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "interview.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -78,7 +71,6 @@ const HistoryPage = () => {
       </Helmet>
       <div className="history-container">
         <div className="history-inner">
-          <div style={{ height: "100px" }}></div>
           <div ref={exportRef}>
             {questions.map((v, i) => (
               <Chat
@@ -90,14 +82,18 @@ const HistoryPage = () => {
                 isHistory={true}
               />
             ))}
+            <div style={{ height: "100px" }}></div>
             <div
-              className={`chat-inner chat-t ${isInViewport ? "show-item" : ""}`}
+              className={`chat-inner chat-p ${isInViewport ? "show-item" : ""}`}
               ref={ref}
             >
+              <span className="chat-t">전체적인 피드백</span>
+              <br />
+              <br />
               {totalPeedback}
             </div>
           </div>
-          <Button name="PDF로 내보내기" type="button" onClick={exportHandle} />
+          <Button name="기록 내보내기" type="button" onClick={exportHandle} />
           <div style={{ height: "100px" }}></div>
         </div>
       </div>
