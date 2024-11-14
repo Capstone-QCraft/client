@@ -15,6 +15,7 @@ const HistoriesPage = () => {
   const navigate = useNavigate();
   const [list, setList] = useState<Interview[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [noData, setNoData] = useState(false);
 
   const [pageCnt, setPageCnt] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,8 +25,13 @@ const HistoriesPage = () => {
   const fetchData = async () => {
     setIsLoading(true);
     const res = await interviewApi.list(currentPage - 1, getListNum);
-    setPageCnt(Math.ceil(res.data.totalInterviews / getListNum));
-    setList(res.data.data);
+    if (res.data.code === "INF") {
+      setNoData(true);
+    } else {
+      setPageCnt(Math.ceil(res.data.totalInterviews / getListNum));
+      setList(res.data.data);
+      setIsLoading(false);
+    }
     setIsLoading(false);
   };
 
@@ -64,8 +70,8 @@ const HistoriesPage = () => {
     return res[0];
   };
 
-  // todo 기록이 없을 때 보여줄 페이지
   if (isLoading) return <LoadingSpinner />;
+  if (noData) return <div>데이터 없음</div>;
   return (
     <HelmetProvider>
       <Helmet>
