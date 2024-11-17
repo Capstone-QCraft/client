@@ -1,5 +1,3 @@
-import React from "react";
-import error404 from "../assets/images/error404.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
 import "./ErrorPage.css";

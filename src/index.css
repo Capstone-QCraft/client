@@ -33,6 +33,7 @@ code {
   --discription-button-bg-color-hover: #ab7754;
 
   --error: url("/src/assets/images/error404-light.webp");
+  --img-no-list: url("/src/assets/images/empty-box.jpg");
 
   --login-label-color: #999;
   --login-bg-color: white;

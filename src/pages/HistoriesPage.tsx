@@ -4,6 +4,7 @@ import "./HistoriesPage.css";
 import { useNavigate } from "react-router-dom";
 import { interviewApi } from "../api";
 import LoadingSpinner from "../components/LoadingSpinner";
+import NoList from "../components/NoList";
 
 export interface Interview {
   interviewId: string;
@@ -71,7 +72,7 @@ const HistoriesPage = () => {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (noData) return <div>데이터 없음</div>;
+  if (noData) return <NoList />;
   return (
     <HelmetProvider>
       <Helmet>
