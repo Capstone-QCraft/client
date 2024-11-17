@@ -4,6 +4,6 @@
   background-image: var(--img-no-list);
   background-position: center;
   overflow: hidden;
-  background-size: cover; /* 추가 */
-  background-repeat: no-repeat; /* 추가 */
+  background-size: cover;
+  background-repeat: no-repeat;
 }

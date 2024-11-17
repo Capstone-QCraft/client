@@ -33,7 +33,7 @@ code {
   --discription-button-bg-color-hover: #ab7754;
 
   --error: url("/src/assets/images/error404-light.webp");
-  --img-no-list: url("/src/assets/images/empty-box.jpg");
+  --img-no-list: url("/src/assets/images/empty-box-light.jpg");
 
   --login-label-color: #999;
   --login-bg-color: white;
@@ -93,6 +93,7 @@ code {
     --discription-button-bg-color-hover: #3c2210;
 
     --error: url("/src/assets/images/error404-dark.png");
+    --img-no-list: url("/src/assets/images/empty-box-dark.jpg");
 
     --login-label-color: black;
     --login-bg-color: #999;
