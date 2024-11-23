@@ -1,0 +1,23 @@
+.footer-container {
+  background-color: var(--footer-bg);
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footer-hr {
+  background-color: var(--footer-hr);
+  height: 1px;
+  border: none;
+}
+
+.footer-copyright {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}

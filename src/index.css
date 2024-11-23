@@ -72,6 +72,12 @@ code {
   --pagination-button-hover-border: rgba(50, 50, 50);
 
   --list-body: #dff2eb;
+
+  --footer-bg: #fbfbfb;
+  --footer-hr: #d3d5d7;
+
+  --icon-bg: rgb(79, 88, 98);
+  --icon-bg-hover: rgb(119, 128, 141);
 }
 
 /* color dark */
@@ -126,6 +132,12 @@ code {
     --pagination-button-hover-border: rgba(248, 248, 248);
 
     --list-body: rgb(40, 40, 40);
+
+    --footer-bg: #1c1e1e;
+    --footer-hr: #747474;
+
+    --icon-bg: rgb(134, 141, 150);
+    --icon-bg-hover: rgb(60, 65, 73);
   }
   body {
     color: white;
