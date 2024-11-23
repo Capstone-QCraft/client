@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import mainImg from "../assets/images/ai2.webp";
 import Discription from "../components/Discription";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import Button from "../components/Button";
 
 import LoadingSpinner from "../components/LoadingSpinner";
 import { fileApi } from "../api";
+import Footer from "../components/Footer";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -123,6 +124,8 @@ const MainPage = () => {
           <Button name="질문 생성" type="submit" />
         </form>
       </Modal>
+
+      <Footer />
     </HelmetProvider>
   );
 };

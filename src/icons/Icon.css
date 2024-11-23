@@ -1,0 +1,10 @@
+.icon {
+  fill: var(--icon-bg);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  fill: var(--icon-bg-hover);
+}
