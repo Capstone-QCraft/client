@@ -11,6 +11,7 @@ const routes = [
   { auth: false, path: "/", element: <MainPage /> },
   { auth: true, path: "/ai/:id", element: <AIPage /> },
   { auth: true, path: "/histories", element: <HistoriesPage /> },
+  { auth: true, path: "/histories/:id", element: <HistoriesPage /> },
   { auth: true, path: "/histories/history/:id", element: <HistoryPage /> },
   { auth: true, path: "/user", element: <UserPage /> },
   {
