@@ -31,6 +31,8 @@ const HistoriesPage = () => {
     const res = await interviewApi.list(Number(id) - 1, getListNum);
     if (res.data.code === "INF") {
       setNoData(true);
+    } else if (res.data.code === "POB") {
+      navigate("/error");
     } else {
       setPageCnt(Math.ceil(res.data.totalInterviews / getListNum));
       setList(res.data.data);
@@ -62,7 +64,7 @@ const HistoriesPage = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>기록</title>
+        <title>{`기록 - ${id}`}</title>
       </Helmet>
       <div className="histories-container">
         <div className="histories-inner">
