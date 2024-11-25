@@ -20,15 +20,14 @@ const HistoriesPage = () => {
   const [noData, setNoData] = useState(false);
 
   const [pageCnt, setPageCnt] = useState(0);
-  // const [currentPage, setCurrentPage] = useState(1);
-  const [getListNum, setGetListNum] = useState(100);
+  const [getListNum, setGetListNum] = useState(15);
   const [direction, setDirecttion] = useState("DESC");
 
   const { id = 1 } = useParams();
 
   const fetchData = async () => {
     setIsLoading(true);
-    const res = await interviewApi.list(Number(id) - 1, getListNum);
+    const res = await interviewApi.list(Number(id) - 1, getListNum, direction);
     if (res.data.code === "INF") {
       setNoData(true);
     } else if (res.data.code === "POB") {
@@ -43,7 +42,7 @@ const HistoriesPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, [id, direction]);
 
   const getNum = (i: number) => {
     return (Number(id) - 1) * getListNum + i + 1;
@@ -59,6 +58,11 @@ const HistoriesPage = () => {
     return res[0];
   };
 
+  const handleDir = () => {
+    if (direction === "DESC") setDirecttion("ASC");
+    else setDirecttion("DESC");
+  };
+
   if (isLoading) return <LoadingSpinner />;
   if (noData) return <NoList />;
   return (
@@ -72,7 +76,9 @@ const HistoriesPage = () => {
             <div className="list-header">
               <div className="t1">번호</div>
               <div className="t2">파일</div>
-              <div className="t3">날짜</div>
+              <div className="t3" onClick={handleDir}>
+                {`날짜 ${direction === "DESC" ? "▼" : "▲"}`}
+              </div>
             </div>
             {list.map((v, i) => (
               <div

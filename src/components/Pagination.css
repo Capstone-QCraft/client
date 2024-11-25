@@ -13,7 +13,6 @@
   align-items: center;
   display: flex;
   height: 100%;
-  /* border-radius: 25px; */
   border-radius: 25px 25px 0 0;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
