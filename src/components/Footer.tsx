@@ -14,7 +14,11 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <div className="footer-inner">
-        <a href="https://github.com/Capstone-QCraft">
+        <a
+          href="https://github.com/Capstone-QCraft"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <GitHubIcon />
         </a>
         <a href={`mailto:${EMAIL}`}>
