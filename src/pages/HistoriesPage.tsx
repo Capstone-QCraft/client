@@ -21,7 +21,7 @@ const HistoriesPage = () => {
 
   const [pageCnt, setPageCnt] = useState(0);
   // const [currentPage, setCurrentPage] = useState(1);
-  const [getListNum, setGetListNum] = useState(10);
+  const [getListNum, setGetListNum] = useState(100);
   const [direction, setDirecttion] = useState("DESC");
 
   const { id = 1 } = useParams();

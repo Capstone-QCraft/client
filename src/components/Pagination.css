@@ -6,20 +6,23 @@
 }
 
 .pagination-inner {
+  background-color: var(--pagination-bg);
   justify-content: space-between;
   padding: 5px;
   box-sizing: border-box;
   align-items: center;
   display: flex;
   height: 100%;
-  background-color: aqua;
-  border-radius: 25px;
-  /* border-radius: 0 0 25px 25px; */
-  /* border-radius: 25px 50px 0 0; */
+  /* border-radius: 25px; */
+  border-radius: 25px 25px 0 0;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .pagination-button,
 .pagination-button-pn {
+  color: var(--color);
+  font-weight: bold;
   height: 40px;
   background-color: transparent;
   border-radius: 20px;
@@ -29,7 +32,7 @@
 
 .pagination-button:hover,
 .pagination-button-pn:hover {
-  background-color: bisque;
+  background-color: var(--pagination-bg-hover);
 }
 
 .pagination-button {
@@ -42,9 +45,10 @@
 
 .pagination-span {
   cursor: default;
-  color: black;
+  font-weight: bold;
 }
 
 .pagination-active {
-  background-color: bisque;
+  background-color: var(--pagination-bg-hover);
+  color: var(--bg-color);
 }

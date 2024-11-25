@@ -72,7 +72,7 @@ const Pagination: React.FC<PaginationProps> = ({ pageCnt }) => {
               navigate(`/histories/${Number(id) - 1}`);
             }}
           >
-            Prev
+            {"< Prev"}
           </button>
         )}
         {setButtons(Number(id))}
@@ -83,7 +83,7 @@ const Pagination: React.FC<PaginationProps> = ({ pageCnt }) => {
               navigate(`/histories/${Number(id) + 1}`);
             }}
           >
-            Next
+            {"Next >"}
           </button>
         )}
       </div>
