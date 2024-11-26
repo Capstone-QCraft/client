@@ -10,3 +10,38 @@
 .history-inner {
   width: var(--card-width);
 }
+
+.history-delete {
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  height: 40px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--color);
+  background-color: var(--history-del-button);
+}
+
+.history-modal {
+  display: flex;
+  gap: 5px;
+}
+.history-del,
+.history-can {
+  flex: 1;
+  height: 35px;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--color);
+}
+.history-del {
+  background-color: var(--history-del-button);
+}
+.history-can {
+  background-color: var(--discription-button-bg-color);
+}

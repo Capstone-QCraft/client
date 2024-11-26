@@ -8,6 +8,7 @@ import { interviewApi } from "../api";
 import { useNavigate, useParams } from "react-router-dom";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import LoadingSpinner from "../components/LoadingSpinner";
+import Modal from "../components/Modal";
 
 const HistoryPage = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,6 +21,10 @@ const HistoryPage = () => {
   const [improvement, setImprovement] = useState([]);
   const [totalPeedback, setTotalPeedback] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   const exportRef = useRef<HTMLDivElement>(null);
   const exportHandle = async () => {
@@ -44,20 +49,39 @@ const HistoryPage = () => {
       alert("문제가 발생했습니다. 다시 시도해주세요.");
       navigate("/histories");
     } else {
-      setIsLoading(true);
-      const res = await interviewApi.history(id);
-      setQuestions(res.data.interview.questions);
-      setAnswers(res.data.interview.answers);
-      setPositivePoint(res.data.interview.positivePoint);
-      setImprovement(res.data.interview.improvement);
-      setTotalPeedback(res.data.interview.overallSuggestion);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const res = await interviewApi.history(id);
+        setQuestions(res.data.interview.questions);
+        setAnswers(res.data.interview.answers);
+        setPositivePoint(res.data.interview.positivePoint);
+        setImprovement(res.data.interview.improvement);
+        setTotalPeedback(res.data.interview.overallSuggestion);
+        setIsLoading(false);
+      } catch (error: any) {
+        if (error.response.status === 404) {
+          navigate("/error");
+        }
+      }
     }
   };
 
   useEffect(() => {
     fetchData();
   }, [id]);
+
+  const deleteHandele = () => {
+    interviewApi.delHistory(id!);
+    if (window.history.length > 1) {
+      // 세션 스토리지에 새로고침 요청 플래그 설정
+      sessionStorage.setItem("refresh", "true");
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
+
+  const cancelHandele = () => closeModal();
 
   if (isLoading) return <LoadingSpinner />;
   return (
@@ -89,10 +113,28 @@ const HistoryPage = () => {
               {totalPeedback}
             </div>
           </div>
+          <br />
           <Button name="기록 내보내기" type="button" onClick={exportHandle} />
+          <br />
+          <br />
+          <button className="history-delete" onClick={openModal}>
+            인터뷰 기록 삭제
+          </button>
           <div style={{ height: "100px" }}></div>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <p>정말 삭제하겠습니까?</p>
+        <div className="history-modal">
+          <button className="history-del" onClick={deleteHandele}>
+            삭제
+          </button>
+          <button className="history-can" onClick={cancelHandele}>
+            취소
+          </button>
+        </div>
+      </Modal>
     </HelmetProvider>
   );
 };

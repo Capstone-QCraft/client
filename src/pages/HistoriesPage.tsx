@@ -44,6 +44,16 @@ const HistoriesPage = () => {
     fetchData();
   }, [id, direction]);
 
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 세션 스토리지 확인하고 플래그가 설정되어 있다면 새로고침
+    // delete 했을 때 위해 설정
+    const shouldRefresh = sessionStorage.getItem("refresh");
+    if (shouldRefresh) {
+      window.location.reload();
+      sessionStorage.removeItem("refresh");
+    }
+  }, []);
+
   const getNum = (i: number) => {
     return (Number(id) - 1) * getListNum + i + 1;
   };

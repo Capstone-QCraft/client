@@ -74,6 +74,8 @@ code {
 
   --icon-bg: rgb(79, 88, 98);
   --icon-bg-hover: rgb(119, 128, 141);
+
+  --history-del-button: rgb(255, 70, 70);
 }
 
 /* color dark */
@@ -133,6 +135,8 @@ code {
 
     --icon-bg: rgb(134, 141, 150);
     --icon-bg-hover: rgb(60, 65, 73);
+
+    --history-del-button: brown;
   }
   body {
     color: white;

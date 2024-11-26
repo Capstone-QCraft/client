@@ -13,7 +13,6 @@ const OauthResponse: React.FC = () => {
     const refreshToken = path.pop();
     const accessToken = path.pop();
 
-    console.log(accessToken);
     if (accessToken) {
       saveToken(accessToken);
       dispatch(login());
