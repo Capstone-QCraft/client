@@ -13,6 +13,8 @@ import useSignIn from "../hooks/useSignIn";
 import OauthButton from "../components/OauthButton";
 import saveToken from "../utils/saveToken";
 import PasswordCondition, { regexTF } from "../components/PasswordCondition";
+import logoLight from "../assets/images/logo-light.png";
+import { useNavigate } from "react-router-dom";
 
 enum ErrorMessages {
   EMPTY = "",
@@ -44,6 +46,7 @@ const LoginPage = () => {
   const [signupPasswordCheck, setSignupPasswordCheck] = useState(""); // 회원가입 비밀번호 확인
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isFlipped, setIsFlipped] = useState(false); // 로그인, 회원가입 창 토글
   const [duplicationCheck, setDuplicationCheck] = useState(false); // 이메일 중복 확인 여부
@@ -223,6 +226,20 @@ const LoginPage = () => {
     }
   };
 
+  // logo
+  const logo = () => {
+    return (
+      <img
+        className="auth-logo"
+        src={logoLight}
+        alt="qcraft-logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
+    );
+  };
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -237,7 +254,11 @@ const LoginPage = () => {
             }
           }}
         >
-          <h1>로그인</h1>
+          <div className="card-title">
+            {isFlipped ? null : logo()}
+            <h1 className="card-h1 ">로그인</h1>
+          </div>
+          {/* <h1>{isFlipped ? null : logo()} 로그인</h1> */}
           <form onSubmit={handleLoginSubmit}>
             <InputField
               id="loginEmail"
@@ -282,7 +303,11 @@ const LoginPage = () => {
             }
           }}
         >
-          <h1>회원가입</h1>
+          <div className="card-title">
+            {isFlipped ? logo() : null}
+            <h1 className="card-h1 "> 회원가입</h1>
+          </div>
+          {/* <h1>{isFlipped ? logo() : null}회원가입</h1> */}
           <form onSubmit={handleSignupSubmit}>
             <InputField
               id="signupName"
