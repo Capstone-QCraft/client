@@ -114,12 +114,14 @@ const HistoryPage = () => {
             </div>
           </div>
           <br />
-          <Button name="기록 내보내기" type="button" onClick={exportHandle} />
-          <br />
-          <br />
-          <button className="history-delete" onClick={openModal}>
-            인터뷰 기록 삭제
-          </button>
+          <div style={{ margin: "0 10px" }}>
+            <Button name="기록 내보내기" type="button" onClick={exportHandle} />
+            <br />
+            <br />
+            <button className="history-delete" onClick={openModal}>
+              인터뷰 기록 삭제
+            </button>
+          </div>
           <div style={{ height: "100px" }}></div>
         </div>
       </div>
