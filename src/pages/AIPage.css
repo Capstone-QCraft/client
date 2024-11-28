@@ -1,0 +1,61 @@
+.ai-container {
+  width: 100%;
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  justify-content: center;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.ai-section {
+  scroll-snap-align: start;
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-inner {
+  width: var(--card-width);
+}
+
+.ai-submit-container {
+  position: fixed;
+  right: 30px;
+  bottom: 20px;
+}
+
+.ai-submit-button {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--discription-button-bg-color);
+  color: var(--color);
+  cursor: pointer;
+  z-index: -10;
+  transition: transform 0.5s ease;
+}
+
+.ai-submit-button-border {
+  display: flex;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  height: 110px;
+  width: 110px;
+  border-radius: 50%;
+  background: conic-gradient(from -45deg, white, black, white);
+  z-index: -1;
+  transition: transform 0.5s ease;
+}
+
+.ai-submit-button:hover {
+  background-color: var(--discription-button-bg-color-hover);
+  transform: scale(1.05);
+}
+
+.ai-submit-button:hover + .ai-submit-button-border {
+  transform: rotate(180deg) scale(1.05);
+}

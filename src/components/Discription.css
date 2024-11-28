@@ -1,0 +1,36 @@
+.discription-container {
+  display: var(--introduce-container);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.discription-inner {
+  margin: 100px 5%;
+  font-size: 20px;
+}
+
+.discription-button-inner {
+  margin: 100px 5%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.discription-button {
+  width: 250px;
+  height: 100px;
+  font-size: 35px;
+  font-weight: bold;
+  color: var(--color);
+  background-color: var(--discription-button-bg-color);
+  border: 2px solid var(--color);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.discription-button:hover {
+  transform: scale(1.05);
+  background-color: var(--discription-button-bg-color-hover);
+  box-shadow: 5px 5px 10px var(--discription-button-shadow);
+}

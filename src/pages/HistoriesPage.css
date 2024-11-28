@@ -1,0 +1,55 @@
+.histories-container {
+  width: 100%;
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  justify-content: center;
+}
+
+.histories-inner {
+  width: var(--card-width);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list-header,
+.list-body {
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid rgb(226, 227, 225);
+  height: 50px;
+  font-size: 20px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.list-header {
+  font-weight: bold;
+}
+
+.list-body {
+  cursor: pointer;
+}
+
+.list-body:hover {
+  background-color: var(--list-body);
+}
+
+.t1,
+.t2,
+.t3 {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 5px;
+}
+.t1 {
+  width: 15%;
+}
+.t2 {
+  width: 55%;
+}
+.t3 {
+  width: 30%;
+  cursor: pointer;
+}

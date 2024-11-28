@@ -1,0 +1,16 @@
+.user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  /* 중앙 정렬 */
+  /* height: calc(100vh - var(--nav-height)); */
+  justify-content: center;
+}
+
+.user-hr {
+  border: 0.5px solid rgb(226, 227, 225);
+  margin: 0;
+  padding: 0;
+}

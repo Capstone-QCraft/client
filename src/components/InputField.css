@@ -1,0 +1,69 @@
+/* 공통 컨테이너 스타일 */
+.input-container {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* 라벨 기본 상태 */
+.floating-label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--login-label-color);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+/* 포커스되었거나 값이 있을 때 라벨이 위로 올라가고 작아짐 */
+.input-container.focused .floating-label {
+  top: -10px;
+  left: 10px;
+  font-size: 12px;
+  color: var(--color);
+}
+
+/* 입력 필드 스타일 */
+.input-wrapper {
+  position: relative;
+}
+
+.input-field {
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid var(--login-card-border);
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: var(--login-bg-color);
+}
+
+.input-field:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f0f0f0;
+}
+
+.input-field:focus {
+  outline: none;
+  border: 3px solid var(--login-input-focused-border-color);
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--login-password-look-color);
+  cursor: pointer;
+}
+
+.toggle-password-btn:hover {
+  color: var(--login-password-look-color-hover);
+}

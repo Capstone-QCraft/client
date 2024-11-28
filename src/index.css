@@ -1,13 +1,200 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: black;
+  background-color: white;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* color light */
+:root {
+  --color: black;
+  --bg-color: white;
+
+  --nav-color: #784421;
+  --nav-color-hover: #45230c;
+  --nav-bg-color: rgb(250, 250, 252, 0.9);
+  --nav-menu-list-bg-color: rgb(250, 250, 252);
+  --nav-logout-color: crimson;
+  --nav-logout-color-hover: red;
+
+  --discription-button-color: white;
+  --discription-button-shadow: rgba(0, 0, 0, 0.5);
+  --discription-button-bg-color: #deaa87;
+  --discription-button-bg-color-hover: #ab7754;
+
+  --error: url("/src/assets/images/error404-light.webp");
+  --img-no-list: url("/src/assets/images/empty-box-light.jpg");
+
+  --login-label-color: #999;
+  --login-bg-color: white;
+  --login-card-border: #ccc;
+  --login-input-focused-border-color: #deaa87;
+  --login-card-box-shadow: rgba(0, 0, 0, 0.2);
+  --login-password-look-color: #0073e6;
+  --login-password-look-color-hover: #005bb5;
+
+  --info-hover: rgb(246, 246, 246);
+
+  --input-file-bg: rgb(249, 250, 251);
+  --input-file-border: rgb(229, 231, 235);
+  --input-file-border-hover: rgb(168, 180, 247);
+
+  --chat-q-bg: rgb(190, 205, 222);
+  --chat-a-bg: rgb(251, 229, 77);
+
+  --oauth-button-kakao: #fee500;
+  --oauth-button-google: rgba(247, 247, 247);
+  --oauth-button-naver: #03c75a;
+
+  --oauth-button-kakao-color: #000000;
+  --oauth-button-google-color: rgb(29, 29, 29);
+  --oauth-button-naver-color: rgb(255, 255, 255);
+
+  --oauth-button-kakao-border: #fee500;
+  --oauth-button-google-border: rgb(105, 108, 106);
+  --oauth-button-naver-border: #03c75a;
+
+  --pagination-bg: rgb(250, 250, 252, 0.9);
+  --pagination-bg-hover: #deaa87;
+
+  --list-body: #dff2eb;
+
+  --footer-bg: #fbfbfb;
+  --footer-hr: #d3d5d7;
+
+  --icon-bg: rgb(79, 88, 98);
+  --icon-bg-hover: rgb(119, 128, 141);
+
+  --history-del-button: rgb(255, 70, 70);
+}
+
+/* color dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color: white;
+    --bg-color: black;
+
+    --nav-color: #deaa87;
+    --nav-color-hover: #784421;
+    --nav-bg-color: rgba(22, 22, 23, 0.9);
+    --nav-menu-list-bg-color: rgb(22, 22, 23);
+    --nav-logout-color: brown;
+    --nav-logout-color-hover: crimson;
+
+    --discription-button-color: black;
+    --discription-button-shadow: rgba(255, 255, 255, 0.5);
+    --discription-button-bg-color: #784421;
+    --discription-button-bg-color-hover: #3c2210;
+
+    --error: url("/src/assets/images/error404-dark.png");
+    --img-no-list: url("/src/assets/images/empty-box-dark.jpg");
+
+    --login-label-color: black;
+    --login-bg-color: #999;
+    --login-card-border: #999;
+    --login-input-focused-border-color: #784421;
+    --login-card-box-shadow: rgba(255, 255, 255, 0.2);
+
+    --info-hover: rgb(50, 50, 50);
+
+    --chat-q-bg: rgb(49, 49, 49);
+    --chat-a-bg: rgb(251, 229, 77);
+    --chat-p-bg: #296368;
+    --chat-n-bg: #9a3f40a1;
+    --chat-t-bg: #395a24;
+
+    --oauth-button-kakao: #fee500;
+    --oauth-button-google: rgba(20, 20, 20);
+    --oauth-button-naver: rgba(63, 63, 63);
+
+    --oauth-button-kakao-color: #000000;
+    --oauth-button-google-color: rgb(223, 223, 223);
+    --oauth-button-naver-color: rgb(155, 155, 157);
+
+    --oauth-button-kakao-border: #fee500;
+    --oauth-button-google-border: rgb(131, 134, 132);
+    --oauth-button-naver-border: rgb(79, 79, 79);
+
+    --pagination-bg: rgba(22, 22, 23, 0.9);
+    --pagination-bg-hover: #784421;
+
+    --list-body: rgb(40, 40, 40);
+
+    --footer-bg: #1c1e1e;
+    --footer-hr: #747474;
+
+    --icon-bg: rgb(134, 141, 150);
+    --icon-bg-hover: rgb(60, 65, 73);
+
+    --history-del-button: brown;
+  }
+  body {
+    color: white;
+    background-color: black;
+  }
+}
+
+/* size desktop */
+:root {
+  --nav-height: 50px;
+  --introduce-container: flex;
+  --card-width: 500px;
+  --information-inner: flex;
+  --info-container-width: 500px;
+}
+
+/* size mobile */
+@media screen and (max-width: 768px) {
+  :root {
+    --introduce-container: auto;
+    --card-width: 100%;
+    --information-inner: block;
+    --info-container-width: 95%;
+  }
+}
+
+/* 화면에 서서히 보이게 */
+@keyframes showItem {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.show-item {
+  animation: showItem 1s ease-in-out;
+}
+
+/* 애니메이션을 비활성화하는 클래스 */
+.no-animation *,
+.no-animation *::before,
+.no-animation *::after {
+  animation: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+}
+
+/* input type number의 스피너 없애기 */
+/* 크롬, 사파리, 엣지, 오페라 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* 파이어폭스 */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

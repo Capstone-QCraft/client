@@ -1,0 +1,48 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 19;
+}
+
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-color);
+  box-shadow: 0 2px 10px var(--discription-button-shadow);
+  border-radius: 10px;
+  padding: 20px;
+  padding-top: 60px;
+  z-index: 20;
+}
+
+.modal-close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.modal-close:hover .line.right,
+.modal-close:hover .line.left {
+  scale: 1.1;
+}
+
+.line.right {
+  top: 50%;
+  transform: translateY(-50%);
+  transform: rotate(45deg);
+}
+
+.line.left {
+  top: 50%;
+  transform: translateY(-50%);
+  transform: rotate(-45deg);
+}

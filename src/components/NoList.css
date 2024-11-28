@@ -1,0 +1,9 @@
+.no-list-container {
+  height: calc(100vh - 50px);
+  z-index: -1;
+  background-image: var(--img-no-list);
+  background-position: center;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

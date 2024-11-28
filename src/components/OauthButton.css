@@ -1,0 +1,34 @@
+.oauth-button-container {
+  border-radius: 12px;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.oauth-button-kakao {
+  background-color: var(--oauth-button-kakao);
+  border: 0.5px solid var(--oauth-button-kakao-border);
+  color: var(--oauth-button-kakao-color);
+}
+
+.oauth-button-google {
+  background-color: var(--oauth-button-google);
+  border: 0.5px solid var(--oauth-button-google-border);
+  color: var(--oauth-button-google-color);
+}
+
+.oauth-button-naver {
+  background-color: var(--oauth-button-naver);
+  border: 0.5px solid var(--oauth-button-naver-border);
+  color: var(--oauth-button-naver-color);
+}
+
+.oauth-button-img {
+  height: 20px;
+}
