@@ -19,7 +19,7 @@
 .discription-button {
   width: 250px;
   height: 100px;
-  font-size: 35px;
+  font-size: 150%;
   font-weight: bold;
   color: var(--color);
   background-color: var(--discription-button-bg-color);
