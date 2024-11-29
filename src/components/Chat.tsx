@@ -39,7 +39,7 @@ const Chat: React.FC<ChatProps> = ({
     >
       <div style={{ height: "100px" }}></div>
       <div className="chat-inner chat-q">
-        <p className="chat-content">{question}</p>
+        <p className="chat-content">{question}dd</p>
       </div>
       {isHistory ? (
         <>

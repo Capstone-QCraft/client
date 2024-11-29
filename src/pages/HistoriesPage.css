@@ -45,11 +45,14 @@
 }
 .t1 {
   width: 15%;
+  font-size: clamp(10px, calc(2vw + 1vh), 20px);
 }
 .t2 {
   width: 55%;
+  text-overflow: ellipsis;
 }
 .t3 {
   width: 30%;
+  font-size: clamp(10px, calc(2vw + 1vh), 20px);
   cursor: pointer;
 }
