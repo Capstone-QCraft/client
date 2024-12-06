@@ -6,6 +6,7 @@ import "./NavBar.css";
 import logoLight from "../assets/images/logo-light.png";
 import logoDark from "../assets/images/logo-dark.png";
 import { logout } from "../store/authSlice";
+import { userApi } from "../api";
 
 enum DEVICE_TYPE {
   DESKTOP = "desktop",
@@ -63,6 +64,7 @@ const NavBar = () => {
           to="/"
           onClick={() => {
             navMenuListHandler();
+            userApi.signOut();
             dispatch(logout());
             navigate("/");
           }}

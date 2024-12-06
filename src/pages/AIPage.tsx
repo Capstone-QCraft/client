@@ -65,6 +65,7 @@ const AIPage = () => {
         } catch (error) {
           alert("문제가 발생했습니다. 다시 시도해주세요.");
           navigate("/");
+          console.error(error);
         } finally {
           setIsLoadingMakeQ(false);
         }

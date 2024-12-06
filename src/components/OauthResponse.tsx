@@ -14,9 +14,9 @@ const OauthResponse: React.FC = () => {
     const accessToken = path.pop();
 
     if (accessToken) {
-      saveToken(accessToken);
-      dispatch(login());
-      navigate("/");
+      // saveToken(accessToken);
+      // dispatch(login());
+      // navigate("/");
     } else {
       console.error("토큰이 없습니다.");
       navigate("/login");

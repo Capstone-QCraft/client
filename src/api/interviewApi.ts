@@ -1,65 +1,35 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
-
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+import apiClient from './apiClient';
 
 // 질문 생성
 const generate = async (fileId: string) => {
-    const token = await Cookies.get('access_token');
-    return axios.post(`${SERVER_URL}/interview/generate`,
+
+    return apiClient.post('/interview/generate',
         null,
         {
             params: { resumeFileId: fileId },
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        })
 };
 
 // 피드백 받기
 const feedback = async (interviewId: string, answers: string[]) => {
-    const token = await Cookies.get('access_token');
-    return axios.post(`${SERVER_URL}/interview/feedback`,
-        { interviewId, answers },
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    return apiClient.post('/interview/feedback', { interviewId, answers });
 };
 
 // 리스트
 const list = async (page: number, size: number, direction: string = "DESC") => {
-    const token = await Cookies.get('access_token');
-    return axios.get(`${SERVER_URL}/interview/list`,
-        {
-            params: { page, size, direction },
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    return apiClient.get('/interview/list', {
+        params: { page, size, direction },
+    });
 };
 
 // 기록
 const history = async (interviewId: string) => {
-    const token = await Cookies.get('access_token');
-    return axios.get(`${SERVER_URL}/interview/${interviewId}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    return apiClient.get(`/interview/${interviewId}`);
 };
 
 // 삭제
 const delHistory = async (interviewId: string) => {
-    const token = await Cookies.get('access_token');
-    return axios.delete(`${SERVER_URL}/interview/delete/${interviewId}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    return apiClient.delete(`/interview/delete/${interviewId}`);
 };
 
 
