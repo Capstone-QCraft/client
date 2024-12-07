@@ -9,6 +9,7 @@ import { logout } from "../store/authSlice";
 import PasswordCondition, { regexTF } from "./PasswordCondition";
 import useUpdateInfo from "../hooks/useUpdateInfo";
 import useGetInfo from "../hooks/useGetInfo";
+import { userApi } from "../api";
 
 interface InformationProps {
   h2: string;
@@ -58,6 +59,8 @@ const Information: React.FC<InformationProps> = ({ h2, contents }) => {
   const handlePasswordChangeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(ErrorMessages.EMPTY);
+
+    console.log("비밀번호 변경 요청");
     if (oldPassword === "") {
       // 기존 비밀번호 필드가 비어 있다면
       setErrorMessage(ErrorMessages.OLD_PASSWORD_EMPTY);

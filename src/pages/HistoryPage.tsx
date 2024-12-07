@@ -96,9 +96,9 @@ const HistoryPage = () => {
               <Chat
                 key={i}
                 question={v}
-                answer={answers[i]}
-                positivePoint={positivePoint[i]}
-                improvement={improvement[i]}
+                answer={answers ? answers[i] : ""}
+                positivePoint={positivePoint ? positivePoint[i] : ""}
+                improvement={improvement ? improvement[i] : ""}
                 isHistory={true}
               />
             ))}
