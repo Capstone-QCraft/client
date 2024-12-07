@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import apiClient from './apiClient';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -40,41 +40,43 @@ const signIn = (email: string, password: string) => {
     return axios.post(`${SERVER_URL}/member/sign-in`, {
         email,
         password,
+    }, {
+        withCredentials: true, // 쿠키 전송 허용
+    });
+};
+
+// 로그아웃
+const signOut = async () => {
+    return axios.post(`${SERVER_URL}/member/sign-out`, null, {
+        withCredentials: true, // 쿠키 전송 허용
     });
 };
 
 // 회원 정보
 const getInfo = async () => {
-    const token = await Cookies.get('access_token');
-    return axios.get(`${SERVER_URL}/member/get-info`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    return apiClient.get("/member/get-info");
 };
 
 // 회원정보 변경
 const updateInfo = async (email: string, name: string, oldPassword: string, newPassword: string) => {
-    const token = await Cookies.get('access_token');
-    return axios.put(`${SERVER_URL}/member/update-info`,
-        { email, name, oldPassword, newPassword },
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    return apiClient.put('/member/update-info', { email, name, oldPassword, newPassword });
 };
 
 // todo 회원 탈퇴
 const withdraw = async () => {
-    const token = await Cookies.get('access_token');
-    return axios.delete(`${SERVER_URL}/member/withdraw`,
+    return apiClient.delete('/member/withdraw', {
+        withCredentials: true,
+    });
+};
+
+// access token 재발급
+const refreshToken = () => {
+    return axios.post(
+        `${SERVER_URL}/member/refresh-token`, null,
         {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+            withCredentials: true,
+        }
+    );
 };
 
 export const userApi = {
@@ -83,7 +85,9 @@ export const userApi = {
     authNumCheck,
     signUp,
     signIn,
+    signOut,
     getInfo,
     updateInfo,
     withdraw,
+    refreshToken,
 };

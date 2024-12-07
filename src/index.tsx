@@ -7,6 +7,9 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { setupAxiosInterceptors } from "./api/apiClient";
+
+setupAxiosInterceptors(store); // Axios 인터셉터에 Redux store 설정
 
 const queryClient = new QueryClient();
 

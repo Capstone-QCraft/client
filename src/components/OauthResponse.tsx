@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../store/authSlice";
-import saveToken from "../utils/saveToken";
 
 const OauthResponse: React.FC = () => {
   const navigate = useNavigate();
@@ -10,12 +9,9 @@ const OauthResponse: React.FC = () => {
 
   useEffect(() => {
     const path = window.location.pathname.split("/");
-    const refreshToken = path.pop();
     const accessToken = path.pop();
-
     if (accessToken) {
-      saveToken(accessToken);
-      dispatch(login());
+      dispatch(login({ accessToken }));
       navigate("/");
     } else {
       console.error("토큰이 없습니다.");

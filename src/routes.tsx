@@ -16,7 +16,7 @@ const routes = [
   { auth: true, path: "/user", element: <UserPage /> },
   {
     auth: false,
-    path: "/member/oauth-response/:access/:refresh",
+    path: "/member/oauth-response/:access-token",
     element: <OauthResponse />,
   },
   { auth: false, isLoginPage: true, path: "/login", element: <LoginPage /> },

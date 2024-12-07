@@ -107,8 +107,7 @@ const LoginPage = () => {
     } else {
       const { data, isSuccess } = await SignInRefetch();
       if (isSuccess) {
-        saveToken(data.accessToken);
-        dispatch(login()); // 로그인 성공
+        dispatch(login({ accessToken: data.body.accessToken })); // 로그인 성공
       } else setLoginErrorMessage(ErrorMessages.FAILED_LOGIN); // 로그인 실패
     }
   };
