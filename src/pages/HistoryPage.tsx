@@ -52,6 +52,7 @@ const HistoryPage = () => {
       try {
         setIsLoading(true);
         const res = await interviewApi.history(id);
+        console.log("res", res);
         setQuestions(res.data.interview.questions);
         setAnswers(res.data.interview.answers);
         setPositivePoint(res.data.interview.positivePoint);

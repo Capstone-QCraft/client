@@ -1,5 +1,9 @@
 import axios from "axios";
-import { getAccessToken } from "../utils/accessTokenManager";
+import { getAccessToken, setAccessToken } from "../utils/accessTokenManager";
+import { userApi } from "./userApi";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice";
+
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -8,17 +12,31 @@ const apiClient = axios.create({
     // timeout: 5000, // 질문 생성 5초 이상 걸려서 주석 처리
 });
 
-apiClient.interceptors.request.use(
-    async (config) => {
-        const token = await getAccessToken();
-        if (token) config.headers.Authorization = `Bearer ${token}`;
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error); // 요청 오류 처리
-    }
-);
+export const setupAxiosInterceptors = (store: any) => {
+    apiClient.interceptors.request.use(
+        async (config) => {
+            let token = await getAccessToken();
+            console.log("token1", token);
 
+            if (!token) {
+                console.log("토큰이 비어있다.");
+                const res = await userApi.refreshToken();
+                const newAccessToken = res.data.body.accessToken;
+                store.dispatch(login({ accessToken: newAccessToken }));
+                token = newAccessToken;
+            }
+
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error); // 요청 오류 처리
+        }
+    );
+};
 
 apiClient.interceptors.response.use(
     (response) => {

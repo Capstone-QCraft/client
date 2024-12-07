@@ -98,7 +98,6 @@ const Information: React.FC<InformationProps> = ({ h2, contents }) => {
     const { isSuccess } = await refetchWithdraw();
     if (isSuccess) {
       dispatch(logout());
-      userApi.signOut();
       navigate("/");
     }
   };

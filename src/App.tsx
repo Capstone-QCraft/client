@@ -3,26 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routes from "./routes";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./ProtectedRoute";
-import { useEffect } from "react";
-import { userApi } from "./api";
-import { useDispatch } from "react-redux";
-import { login } from "./store/authSlice";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const res = await userApi.refreshToken();
-        await dispatch(login({ accessToken: res.data.body.accessToken }));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetch();
-  }, []);
-
   return (
     <BrowserRouter>
       <NavBar />

@@ -64,7 +64,9 @@ const updateInfo = async (email: string, name: string, oldPassword: string, newP
 
 // todo 회원 탈퇴
 const withdraw = async () => {
-    return apiClient.delete('/member/withraw');
+    return apiClient.delete('/member/withdraw', {
+        withCredentials: true,
+    });
 };
 
 // access token 재발급
