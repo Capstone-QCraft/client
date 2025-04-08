@@ -1,180 +1,54 @@
-# Qcraft front-end
+# [Qcraft client](https://qcraft-interview.vercel.app)
 
-<!-- ### <a href="https://www.qcraft.site">서비스 링크</a> -->
+### Claude 기반 AI 면접관
 
-### <a href="https://qcraft-interview.vercel.app">서비스 링크</a> - 현재 서버 내려둠
+[프로젝트 협업 레포지토리](https://github.com/Capstone-QCraft)
 
-### <a href="https://github.com/Capstone-QCraft">프로젝트 협업 레포지토리</a>
+###### 2024.09 - 2024.12
 
-## 서비스 화면
+###### 2인 프로젝트
 
-### 로그인
+## 📌 Summary
 
-<table border="1">
-    <tr>
-        <th style="text-align: center;">Desktop (Light)</th>
-        <th style="text-align: center;">Desktop (Dark)</th>
-        <th style="text-align: center;">Mobile (Light)</th>
-        <th style="text-align: center;">Mobile (Dark)</th>
-    </tr>
-    <tr>
-        <td>
-            <img height="200" alt="login-desktop-light" src="src/assets/images/readme/login-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="login-desktop-dark" src="src/assets/images/readme/login-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="200" alt="login-mobile-light" src="src/assets/images/readme/login-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="login-mobile-dark" src="src/assets/images/readme/login-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+이력서, 자소서 등으로 개인 맞춤형 질문을 생성하고, 답변에 대한 객관적이고 구체적인 피드백을 제공하여 효율적인 면접 대비
 
-### 회원가입
+- `Web Speech API`
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="signup-desktop-light" src="src/assets/images/readme/signup-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="signup-desktop-dark" src="src/assets/images/readme/signup-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="200" alt="signup-mobile-light" src="src/assets/images/readme/signup-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="signup-mobile-dark" src="src/assets/images/readme/signup-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+  실제와 같은 환경을 제공하기 위해 음성인식 답변이 가능하다.
 
-### 메인화면
+## Troubleshooting
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="main-desktop-light" src="src/assets/images/readme/main-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="main-desktop-dark" src="src/assets/images/readme/main-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="200" alt="main-mobile-light" src="src/assets/images/readme/main-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="main-mobile-dark" src="src/assets/images/readme/main-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+- `페이지 이름`
 
-### 모바일 navbar
+  SPA 에선 페이지 이름을 어떻게 바꿔야 할까 고민하다가 `useState` 로 변경하는 방법을 사용했다. 추후 더 알아보니 `helmet` 을 사용하면 메타데이터 까지 바꿀 수 있어 이를 적용하였다. `SSR` 도 사용하지 않았으면서 `react-helmet` 말고 `react-helmet-async` 를 적용한 것엔 `npmjs` 를 보니 유지보수가 5년전에 그쳐있어 상대적으로 유지보수가 잘된 `react-helmet-async` 를 사용하기로 결정하였다.
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="nav-mobile-light" src="src/assets/images/readme/nav-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="nav-mobile-dark" src="src/assets/images/readme/nav-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+- `로딩`
 
-### 파일 입력 모달
+  AI 가 생각하는 데 시간이 많이 소요되어 길게는 10초 가량 응답을 기다려야 했다.
+  이 대기 시간에 로딩스피너를 추가하여 UX 향상 -> 지금 든 생각인데, 면접에 대한 팁을 제공해 주면 더 좋을 것 같다.
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="modal-desktop-light" src="src/assets/images/readme/modal-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="modal-desktop-dark" src="src/assets/images/readme/modal-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="200" alt="modal-mobile-light" src="src/assets/images/readme/modal-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="modal-mobile-dark" src="src/assets/images/readme/modal-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+- `Web Speech API`
 
-### 인터뷰
+  1번 문항 답변을 마치고 2번 문항 답변을 할 때, 1번의 마지막 답변이 남아서 입력되는 버그로 골머리를 좀 앓았다. 하지만 해결은 꽤 간단했다. useState를 사용해서 비워주는 것으로 간단히 해결 가능했다.
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="interview-desktop-light" src="src/assets/images/readme/interview-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="interview-desktop-dark" src="src/assets/images/readme/interview-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="200" alt="interview-mobile-light" src="src/assets/images/readme/interview-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="interview-mobile-dark" src="src/assets/images/readme/interview-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+- `브라우저 환경에서 화면 내보내기 문제`
 
-### 리뷰
+  `html2canvas` 라이브러리를 사용하여 인터뷰 결과 화면을 이미지로 저장하는 것을 구현함에 있어서 등장 애니메이션으로 opacity 를 점점 높이는 것이 모두 끝난 후에도 투명하게 저장되었다. 저장하기 전에 애니메이션이 들어가는 클래스를 제거하고 저장후에 다시 추가하는 방향으로 해결하였다.
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="review-desktop-light" src="src/assets/images/readme/review-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="review-desktop-dark" src="src/assets/images/readme/review-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="500" alt="review-mobile-light" src="src/assets/images/readme/review-mobile-light.png" />
-        </td>
-        <td>
-            <img height="500" alt="review-mobile-dark" src="src/assets/images/readme/review-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+## 🔨 Technology Stack(s)
 
-### 기록
+| Stack                                                                                                 | Version  | etc.        |
+| ----------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=black">           | `18.3.1` |             |
+| <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"> | `4.9.5`  |
+| <img src="https://img.shields.io/badge/Redux-764ABC?style=flat&logo=Redux&logoColor=white">           | `9.2.0`  | react-redux |
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="history-desktop-light" src="src/assets/images/readme/history-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="history-desktop-dark" src="src/assets/images/readme/history-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="200" alt="history-mobile-light" src="src/assets/images/readme/history-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="history-mobile-dark" src="src/assets/images/readme/history-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+## ⚙️ Setup & Usage
 
-### 내정보
+```bash
+# Install Packages
+npm install
 
-<table border="1">
-    <tr>
-        <td>
-            <img height="200" alt="user-desktop-light" src="src/assets/images/readme/user-desktop-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="user-desktop-dark" src="src/assets/images/readme/user-desktop-dark.png" />
-        </td>
-        <td>
-            <img height="200" alt="user-mobile-light" src="src/assets/images/readme/user-mobile-light.png" />
-        </td>
-        <td>
-            <img height="200" alt="user-mobile-dark" src="src/assets/images/readme/user-mobile-dark.png" />
-        </td>
-    </tr>
-</table>
+# Run Frontend Server
+npm run start
+```
